@@ -1,8 +1,7 @@
 const router = require("express").Router();
 
-/* GET home page */
-router.get("/", (req, res, next) => {
-  res.render("index");
+router.get("/", (req, res) => {
+  res.redirect("/login");
 });
 
 module.exports = router;
