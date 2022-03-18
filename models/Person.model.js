@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 const personSchema = new Schema(
   {
     user: { type: Schema.Types.ObjectId, ref: "User", required: true },
-    petList: []
+    petList: [{ type: Schema.Types.ObjectId, ref: "Pet" }]
   }
 );
 
