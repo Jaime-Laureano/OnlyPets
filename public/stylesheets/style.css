@@ -10,3 +10,14 @@ a {
 h1 {
   color: 15px;
 }
+
+h6 {
+  color: red;
+}
+
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}

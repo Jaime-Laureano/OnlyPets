@@ -1,0 +1,19 @@
+<div class="flex">
+    <h1>Sign Up</h1>
+    <form action="/signup" method="POST" class="flex">
+        <label for="fullName">Full Name:</label>
+        <input type="text" name="fullName" placeholder="Enter Full Name">
+        <label for="username">Username:</label>
+        <input type="text" name="username" placeholder="Enter Username">
+        <label for="password">Password:</label>
+        <input type="password" name="password" placeholder="Enter Password">
+        <label for="address">Address:</label>
+        <input type="text" name="address" placeholder="Enter Address">
+        <input type="checkbox" name="isShelter">
+        <label for="isShelter">Shelter</label>
+        <button type="submit">Sign Up</button>
+    </form>
+    {{#if}}
+        <h6>{{error}}</h6>
+    {{/if}}
+</div>

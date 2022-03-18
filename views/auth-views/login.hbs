@@ -1,1 +1,14 @@
-<h1>Login</h1>
+<div class="flex">
+    <h1>Login</h1>
+    <form action="/login" method="POST" class="flex">
+        <label for="username">Username:</label>
+        <input type="text" name="username" placeholder="Enter Username">
+        <label for="password">Password:</label>
+        <input type="password" name="password" placeholder="Enter Password">
+        <button type="submit">Login</button>
+        <button><a href="/signup">Sign Up</a></button>
+    </form>
+    {{#if error}}
+        <h6>{{error}}</h6>
+    {{/if}}
+</div>
