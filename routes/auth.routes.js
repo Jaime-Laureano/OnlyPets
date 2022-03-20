@@ -29,12 +29,12 @@ router.post("/login", async (req, res) => {
   if (user.isShelter) {
     const shelter = await Shelter.findOne({user: user._id});
     req.session.shelter = shelter;
+    res.send("Logged");
   } else {
     const person = await Person.findOne({user: user._id});
     req.session.person = person;
+    res.redirect("/search");
   }
-
-  res.send("Logged");
 });
 
 router.get("/signup", (req, res) => {

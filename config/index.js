@@ -37,7 +37,8 @@ module.exports = (app) => {
   // Normalizes the path to the views folder
   const viewsPath = path.join(__dirname, "..", "views");
   const authViewsPath = path.join(viewsPath, "auth-views");
-  app.set("views", [viewsPath, authViewsPath]);
+  const personViewsPath = path.join(viewsPath, "person-views");
+  app.set("views", [viewsPath, authViewsPath, personViewsPath]);
   // Sets the view engine to handlebars
   app.set("view engine", "hbs");
   // Handles access to the public folder
