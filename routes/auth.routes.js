@@ -12,7 +12,7 @@ router.get("/login", (req, res) => {
 router.post("/login", async (req, res) => {
   const { username, password } = req.body;
   const user = await User.findOne({username: username});
-  
+
   if (!user) {
     res.render("login", {error: "User not found!"});
     return;
@@ -47,23 +47,28 @@ router.post("/signup", async (req, res) => {
   const hashPassword = await bcrypt.hash(password, salt);
 
   try {
+    if (await (await User.find({username: username})).length > 0) {
+      res.render("signup", {error: "Username already exists!"});
+      return;
+    }
+
     const user = new User({
       fullName: fullName,
       username: username,
       password: hashPassword,
       address: address,
-      isShelter: isShelter
+      isShelter: isShelter ? true : false
     });
     await user.save();
-  } catch (err) {
-    res.render("signup", {error: err});
-    return;
-  }
 
-  if (user.isShelter) {
-    await Shelter.create({user: user._id});
-  } else {
-    await Person.create({user: user._id});
+    if (user.isShelter) {
+      await Shelter.create({user: user._id});
+    } else {
+      await Person.create({user: user._id});
+    }
+  } catch (err) {
+    res.render("signup", {error: "Mandatory fields not filled!"});
+    return;
   }
 
   res.redirect("/login");
