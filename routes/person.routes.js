@@ -20,8 +20,7 @@ router.post("/search", async (req, res) => {
         specieFilter = { $or: [{specie: "dog"}, {specie: "cat"}]};
     }
     const pets = await Pet.find(specieFilter);
-    console.log(specieFilter);
-    console.log(pets);
+
     res.render("search-results", {pets});
 });
 
