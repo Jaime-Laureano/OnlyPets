@@ -29,7 +29,7 @@ router.post("/login", async (req, res) => {
   req.session.user = user;
   if (user.isShelter) {
     req.session.role = "shelter";
-    res.send("Logged");
+    res.redirect("/shelter-pets");
   } else {
     req.session.role = "person";
     res.redirect("/search");

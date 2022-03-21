@@ -1,26 +1,30 @@
 const router = require("express").Router();
+const Shelter = require("../models/Shelter.model");
+const Pet = require("../models/Pet.model");
 
-const petModel = require("../models/Pet.model");
+router.get("/shelter-pets", async (req, res) => {
+  const shelter = await Shelter.findOne({user: req.session.user._id});
+  shelter.populate("pets");
+  const pets = shelter.pets;
+  res.render("shelter-pets", {pets});
+});
 
-router.get("/shelter-profile", (req, res) => {
-    res.render("shelter-profile");
-  });
+router.get("/pet-add", (req, res) => {
+  res.render("pet-add");
+});
 
-  router.get("/shelter-edit", (req, res) => {
-    res.render("shelter-edit");
-  });
+router.post('/pet-add', async (req, res) => {
+  const {  } = req.body
 
-router.get("/shelter-add", (req, res) => {
-    res.render("shelter-add");
-  });
+  await Pet.create({ });
+});
 
-router.post('/shelter-add', (req, res, next) => {
-    const {  } = req.body
-    
-    Pet.create({ })
-    .then( () => res.redirect(''))
-    .catch( (err) => res.render('shelter-add'));
-  })
-  
+router.get("/pet-edit", (req, res) => {
+  res.render("pet-edit");
+});
+
+router.post("/pet-edit", (req, res) => {
+  res.render("pet-edit");
+});
 
 module.exports = router;
