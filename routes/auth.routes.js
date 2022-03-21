@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../models/User.model");
 const Person = require("../models/Person.model");
 const Shelter = require("../models/Shelter.model");
-const { isLoggedIn, isLoggedOut } = require('../middleware/isLoggedIn.js');
+const { isLoggedIn, isLoggedOut } = require('../middlewares/isLoggedIn');
 
 router.get("/login", (req, res) => {
   res.render("login");
