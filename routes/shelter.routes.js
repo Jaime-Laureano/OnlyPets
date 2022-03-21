@@ -1,5 +1,7 @@
 const router = require("express").Router();
+const mongoose = require("mongoose");
 const Shelter = require("../models/Shelter.model");
+const Person = require("../models/Person.model");
 const Pet = require("../models/Pet.model");
 
 router.get("/shelter-pets", async (req, res) => {
@@ -9,22 +11,81 @@ router.get("/shelter-pets", async (req, res) => {
   res.render("shelter-pets", {pets});
 });
 
-router.get("/pet-add", (req, res) => {
+router.get("/pet/add", (req, res) => {
   res.render("pet-add");
 });
 
-router.post('/pet-add', async (req, res) => {
-  const {  } = req.body
+router.post('/pet/add', async (req, res) => {
+  const { name, specieDog, specieCat, breed, age, size, weight, male, female, vaccinated, neutered } = req.body;
+  const shelter = await Shelter.findOne({user: req.session.user._id});
 
-  await Pet.create({ });
+  const pet = new Pet({
+    name: name,
+    specie: specieDog ? "dog" : "cat",
+    breed: breed,
+    age: age,
+    size: size,
+    weight: weight,
+    sex: male ? "male" : "female",
+    vaccinated: vaccinated ? true : false,
+    neutered: neutered ? true : false
+  });
+  await pet.save();
+
+  shelter.pets.push(pet._id);
+  await shelter.save();
+
+  res.redirect("/shelter-pets");
 });
 
-router.get("/pet-edit", (req, res) => {
-  res.render("pet-edit");
+router.get("/pet/edit/:id", async (req, res) => {
+  const petId = mongoose.Types.ObjectId(req.params.id);
+  const pet = await Pet.findById(petId);
+
+  let options = {pet};
+  if (pet.vaccinated) options.vaccinatedChecked = true;
+  if (pet.neutered) options.neuteredChecked = true;
+  pet.specie === "dog" ? options.specieDog = true : options.specieCat = true;
+  pet.sex === "male" ? options.male = true : options.female = true;
+
+  res.render("pet-edit", options);
 });
 
-router.post("/pet-edit", (req, res) => {
-  res.render("pet-edit");
+router.post("/pet/edit/:id", async (req, res) => {
+  const { name, specieDog, specieCat, breed, age, size, weight, male, female, vaccinated, neutered } = req.body;
+  const petId = mongoose.Types.ObjectId(req.params.id);
+  const pet = await Pet.findById(petId);
+
+  pet.name = name;
+  pet.specie = specieDog ? "dog" : "cat";
+  pet.breed = breed;
+  pet.age = age;
+  pet.size = size;
+  pet.weight = weight;
+  pet.sex = male ? "male" : "female";
+  pet.vaccinated = vaccinated ? true : false;
+  pet.neutered = neutered ? true : false;
+  await pet.save();
+
+  res.redirect("/shelter-pets");
+});
+
+router.get("/pet/delete/:id", async (req, res) => {
+  const petId = mongoose.Types.ObjectId(req.params.id);
+  const petLists = await Person.find({petList: petId});
+
+  petLists.forEach(async (petList) => {
+    petList.splice(petList.indexOf(petId), 1);
+    await petList.save();
+  });
+
+  const shelter = await Shelter.findOne({user: req.session.user._id});
+  shelter.pets.splice(shelter.pets.indexOf(petId), 1);
+  shelter.save();
+
+  await Pet.findByIdAndDelete(petId);
+
+  res.redirect("/shelter-pets");
 });
 
 module.exports = router;

@@ -1,16 +1,23 @@
+<a href="/shelter-pets">Pets</a>
+<br>
 <h2>My Pets</h2>
 <br>
 {{#each pets}}
     <br>
     <h4>{{this.name}}</h4>
+    <h4>{{this.specie}}</h4>
+    <h4>{{this.breed}}</h4>
     <h4>{{this.age}}</h4>
     <h4>{{this.size}}</h4>
     <h4>{{this.weight}}</h4>
     <h4>{{this.sex}}</h4>
     <h4>{{this.vaccinated}}</h4>
+    <h4>{{this.neutered}}</h4>
     <!--<label for="vaccinated"></label>
     <input type="checkbox" name="vaccinated" value="{{this.vaccinated}}">
     <br>-->
-    <button><a href="/pet/details/{{this._id}}">Details</a></button>
-    <button><a href="/pet-list/add/{{this._id}}">Save</a></button>
+    <button><a href="/pet/edit/{{this._id}}">Details</a></button>
+    <button><a href="/pet/delete/{{this._id}}">Delete</a></button>
 {{/each}}
+<br>
+<button><a href="/pet/add">Add</a></button>

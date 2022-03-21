@@ -1,33 +1,41 @@
-<h1>Edit Pet</h1>
-
-  <form action="/shelter-edit" method="POST" class="flex">
-    <label for="name">Name</label>
+<a href="/shelter-pets">Pets</a>
+<br>
+<div>
+  <h1>Edit Pet</h1>
+  <form action="/pet/edit/{{pet._id}}" method="POST">
+    <label for="name">Name:</label>
     <input type="text" name="name" value="{{pet.name}}" />
-    <br />
-    <label for="dog">Dog</label>
-    <input type="checkbox" name="Dog" value="{{this.dog}}" />
-    <br />
-    <label for="cat">Cat</label>
-    <input type="checkbox" name="cat" value="{{this.cat}}" />
-    <br />
-    <label for="age">Age</label>
-    <input type="number" name="age" value="{{pet.age}}" />
-    <br />
-    <label for="size">Size</label>
-    <input type="number" name="size" value="{{pet.size}}" />
-    <br />
-    <label for="weight">Weight</label>
-    <input type="number" name="weight" value="{{pet.weight}}" />
-    <br />
-    <label for="sex">Sex</label>
-    <input type="text" name="sex" value="{{pet.sex}}" />
-    <br />
-    <label for="vaccinated">Vaccinated</label>
-    <input type="checkbox" name="vaccinated" value="{{this.vaccinated}}" />
-    <br />
-    <label for="neutered">Neutered</label>
-    <input type="checkbox" name="neutered" value="{{this.neutered}}" />
-    <br />
-    <label for="breed">Breed</label>
+    <br>
+    <label for="specie">Specie:</label>
+    <input type="checkbox" name="specieDog" {{#if specieDog}} checked {{/if}} />
+    <label for="specieDog">Dog</label>
+    <input type="checkbox" name="specieCat" {{#if specieCat}} checked {{/if}} />
+    <label for="specieCat">Cat</label>
+    <br>
+    <label for="breed">Breed:</label>
     <input type="text" name="breed" value="{{pet.breed}}" />
     <br />
+    <label for="age">Age:</label>
+    <input type="number" name="age" value="{{pet.age}}" />
+    <br>
+    <label for="size">Size:</label>
+    <input type="number" name="size" value="{{pet.size}}" />
+    <br>
+    <label for="weight">Weight:</label>
+    <input type="number" name="weight" value="{{pet.weight}}" />
+    <br>
+    <label for="sex">Sex:</label>
+    <input type="checkbox" name="male" {{#if male}} checked {{/if}} />
+    <label for="male">Male</label>
+    <input type="checkbox" name="female" {{#if female}} checked {{/if}} />
+    <label for="female">Female</label>
+    <br>
+    <label for="vaccinated">Vaccinated:</label>
+    <input type="checkbox" name="vaccinated" {{#if vaccinatedChecked}} checked {{/if}} />
+    <br>
+    <label for="neutered">Neutered:</label>
+    <input type="checkbox" name="neutered" {{#if neuteredChecked}} checked {{/if}} />
+    <br>
+    <button type="submit">Edit</button>
+  </form>
+</div>
