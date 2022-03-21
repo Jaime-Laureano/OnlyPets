@@ -4,21 +4,13 @@
 <h2>Pet List</h2>
 <br>
 {{#each pets}}
-    <label for="name"></label>
-    <input type="text" name="name" value="{{this.name}}">
     <br>
-    <label for="age"></label>
-    <input type="number" name="age" value="{{this.age}}">
-    <br>
-    <label for="size"></label>
-    <input type="number" name="size" value="{{this.size}}">
-    <br>
-    <label for="weight"></label>
-    <input type="number" name="weight" value="{{this.weight}}">
-    <br>
-    <label for="sex"></label>
-    <input type="text" name="sex" value="{{this.sex}}">
-    <br>
+    <h4>{{this.name}}</h4>
+    <h4>{{this.age}}</h4>
+    <h4>{{this.size}}</h4>
+    <h4>{{this.weight}}</h4>
+    <h4>{{this.sex}}</h4>
+    <h4>{{this.vaccinated}}</h4>
     <!--<label for="vaccinated"></label>
     <input type="checkbox" name="vaccinated" value="{{this.vaccinated}}">
     <br>-->

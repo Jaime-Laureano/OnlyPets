@@ -10,7 +10,8 @@ router.get("/search", (req, res) => {
 
 router.post("/search", async (req, res) => {
     const { dog, cat } = req.body;
-    const specieFilter = {};
+    let specieFilter = {};
+
     if ((dog) && (!cat)) {
         specieFilter = {species: "dog"};
     } else if ((!dog) && (cat)) {
@@ -25,6 +26,7 @@ router.post("/search", async (req, res) => {
 
 router.get("/pet-list", async (req, res) => {
     const person = await Person.findOne({user: req.session.user._id});
+    person.populate("petList");
     const pets = person.petList;
     res.render("pet-list", {pets});
 });
@@ -33,12 +35,17 @@ router.get("/pet/details/:id", async (req, res) => {
     const petId = mongoose.Types.ObjectId(req.params.id);
     const pet = await Pet.findById(petId);
     const shelter = await Shelter.findOne({pets: petId});
+    shelter.populate("user");
     res.render("pet-details", {pet, shelter});
 });
 
 router.get("/pet-list/add/:id", async (req, res) => {
     const petId = mongoose.Types.ObjectId(req.params.id);
-    const person = await Person.findOneAndUpdate({user: req.session.user._id}, {$push: {petList: petId}});
+    const person = await Person.findOne({user: req.session.user._id});
+    if (!person.petList.includes(petId)) {
+        person.petList.push(petId);
+        await person.save();
+    }
     res.redirect("/search");
 });
 
