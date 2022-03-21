@@ -1,19 +1,18 @@
 <a href="/search">Search</a>
 <button><a href="/pet-list">Pet List</a></button>
 <br>
-<h2>Pet List</h2>
-<br>
-{{#each pets}}
+<div>
+    <h2>Pet List</h2>
     <br>
-    <h4>{{this.name}}</h4>
-    <h4>{{this.age}}</h4>
-    <h4>{{this.size}}</h4>
-    <h4>{{this.weight}}</h4>
-    <h4>{{this.sex}}</h4>
-    <h4>{{this.vaccinated}}</h4>
-    <!--<label for="vaccinated"></label>
-    <input type="checkbox" name="vaccinated" value="{{this.vaccinated}}">
-    <br>-->
-    <button><a href="/pet/details/{{this._id}}">Details</a></button>
-    <button><a href="/pet-list/remove/{{this._id}}">Remove</a></button>
-{{/each}}
+    {{#each pets}}
+        <br>
+        <h4>{{this.name}}</h4>
+        <h4>{{this.age}}</h4>
+        <h4>{{this.size}}</h4>
+        <h4>{{this.weight}}</h4>
+        <h4>{{this.sex}}</h4>
+        <h4>{{this.vaccinated}}</h4>
+        <button><a href="/pet/details/{{this._id}}">Details</a></button>
+        <button><a href="/pet-list/remove/{{this._id}}">Remove</a></button>
+    {{/each}}
+</div>

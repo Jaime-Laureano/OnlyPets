@@ -9,7 +9,8 @@ const petSchema = new Schema({
   weight: { type: Number, min: 0, max: 30, required: true },
   sex: { type: String, enum: ["male", "female"] },
   vaccinated: Boolean,
-  neutered: Boolean
+  neutered: Boolean,
+  imageUrl: String
 });
 
 const Pet = model("Pet", petSchema);

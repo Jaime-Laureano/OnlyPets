@@ -13,11 +13,11 @@ router.post("/search", async (req, res) => {
     let specieFilter = {};
 
     if ((dog) && (!cat)) {
-        specieFilter = {species: "dog"};
+        specieFilter = {specie: "dog"};
     } else if ((!dog) && (cat)) {
-        specieFilter = {species: "cat"};
+        specieFilter = {specie: "cat"};
     } else {
-        specieFilter = { $or: [{species: "dog"}, {species: "cat"}]};
+        specieFilter = { $or: [{specie: "dog"}, {specie: "cat"}]};
     }
     const pets = await Pet.find(specieFilter);
 

@@ -3,16 +3,38 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00b7ff;
-}
-
 h1 {
   color: 15px;
 }
 
 h3 {
   color: red;
+  justify-content: center;
+}
+
+.login-signup {
+  font-size: 20px;
+}
+
+.login-signup input {
+  height: 30px;
+  font-size: 20px;
+}
+
+.login-signup button {
+  text-decoration: none;
+  width: 250px;
+  height: 40px;
+  margin: 5px;
+  color: white;
+}
+
+.blue-button {
+  background-color: blue;
+}
+
+#signup-button {
+  background-color: red;
 }
 
 .flex {
