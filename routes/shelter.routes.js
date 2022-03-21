@@ -14,7 +14,7 @@ router.get("/shelter-add", (req, res) => {
     res.render("shelter-add");
   });
 
-  router.post('/shelter-add', (req, res, next) => {
+router.post('/shelter-add', (req, res, next) => {
     const {  } = req.body
     
     Pet.create({ })

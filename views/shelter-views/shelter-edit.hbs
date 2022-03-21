@@ -1,0 +1,33 @@
+<h1>Edit Pet</h1>
+
+  <form action="/shelter-edit" method="POST" class="flex">
+    <label for="name">Name</label>
+    <input type="text" name="name" value="{{pet.name}}" />
+    <br />
+    <label for="dog">Dog</label>
+    <input type="checkbox" name="Dog" value="{{this.dog}}" />
+    <br />
+    <label for="cat">Cat</label>
+    <input type="checkbox" name="cat" value="{{this.cat}}" />
+    <br />
+    <label for="age">Age</label>
+    <input type="number" name="age" value="{{pet.age}}" />
+    <br />
+    <label for="size">Size</label>
+    <input type="number" name="size" value="{{pet.size}}" />
+    <br />
+    <label for="weight">Weight</label>
+    <input type="number" name="weight" value="{{pet.weight}}" />
+    <br />
+    <label for="sex">Sex</label>
+    <input type="text" name="sex" value="{{pet.sex}}" />
+    <br />
+    <label for="vaccinated">Vaccinated</label>
+    <input type="checkbox" name="vaccinated" value="{{this.vaccinated}}" />
+    <br />
+    <label for="neutered">Neutered</label>
+    <input type="checkbox" name="neutered" value="{{this.neutered}}" />
+    <br />
+    <label for="breed">Breed</label>
+    <input type="text" name="breed" value="{{pet.breed}}" />
+    <br />
