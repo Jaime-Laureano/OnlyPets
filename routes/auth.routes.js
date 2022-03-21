@@ -27,12 +27,10 @@ router.post("/login", async (req, res) => {
 
   req.session.user = user;
   if (user.isShelter) {
-    const shelter = await Shelter.findOne({user: user._id});
-    req.session.shelter = shelter;
+    req.session.role = "shelter";
     res.send("Logged");
   } else {
-    const person = await Person.findOne({user: user._id});
-    req.session.person = person;
+    req.session.role = "person";
     res.redirect("/search");
   }
 });
