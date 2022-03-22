@@ -48,19 +48,3 @@ module.exports = (app) => {
   // Handles access to the favicon
   app.use(favicon(path.join(__dirname, "..", "public", "images", "favicon.ico")));
 };
-
-//// API Information ////
-
-const getBreedInfo = breedName => {
-  axios
-    .get(`https://api.thecatapi.com/v1/breeds`)
-    .then(response => {
-      const breedDetail = response.data[0];
-
-    })
-    .catch(err => {
-      console.log(err);
-     
-    });
-};
- 
