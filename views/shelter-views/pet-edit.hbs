@@ -2,7 +2,11 @@
 <br>
 <div>
   <h1>Edit Pet</h1>
-  <form action="/pet/edit/{{pet._id}}" method="POST">
+  <form action="/pet/edit/{{pet._id}}" method="POST" enctype="multipart/form-data">
+    <label for="pet-image">Image:</label>
+    <input type="file" name="pet-image" class="form-control-file" />
+    <input type="text" name="existingImage" hidden value="{{imageUrl}}">
+    <br>
     <label for="name">Name:</label>
     <input type="text" name="name" value="{{pet.name}}" />
     <br>

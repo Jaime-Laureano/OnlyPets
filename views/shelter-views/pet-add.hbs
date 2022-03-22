@@ -2,7 +2,10 @@
 <br>
 <div>
   <h1>Add A Pet</h1>
-  <form action="/pet/add" method="POST">
+  <form action="/pet/add" method="POST" enctype="multipart/form-data">
+    <label for="pet-image">Image:</label>
+    <input type="file" name="pet-image" />
+    <br>
     <label for="name">Name:</label>
     <input type="text" name="name" value="" placeholder="Enter Pet Name" />
     <br>

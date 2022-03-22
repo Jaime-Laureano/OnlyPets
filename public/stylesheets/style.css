@@ -37,9 +37,21 @@ h3 {
   background-color: red;
 }
 
+.pet-image {
+  width: 200px;
+  height: 200px;
+}
+
 .flex {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
 }
