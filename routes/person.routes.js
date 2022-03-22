@@ -37,8 +37,7 @@ router.get("/pet/details/:id", async (req, res) => {
     const pet = await Pet.findById(petId);
     const shelter = await Shelter.findOne({pets: petId});
     await shelter.populate("user");
-    console.log(shelter.user);
-    let googleApiAddress = shelter.user.address;
+    const googleApiAddress = shelter.user.address;
     res.render("pet-details", {pet, shelter, api_key, googleApiAddress});
 });
 
