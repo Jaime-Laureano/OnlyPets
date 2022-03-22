@@ -1,2 +1,28 @@
+<a href="/search">Search</a>
+<button><a href="/pet-list">Pet List</a></button>
+<br>
 <h1>Breed Information</h1>
-
+{{#if image}}
+    <img src="{{image}}" alt="Breed image">
+{{/if}}
+{{#if breed.name}}
+    <p>Name: {{breed.name}}</p>
+{{/if}}
+{{#if breed.life_span}}
+    <p>Life Span: {{breed.life_span}}</p>
+{{/if}}
+{{#if breed.origin}}
+    <p>Origin: {{breed.origin}}</p>
+{{/if}}
+{{#if breed.temperament}}
+    <p>Temperament: {{breed.temperament}}</p>
+{{/if}}
+{{#if breed.height.metric}}
+    <p>Height: {{breed.height.metric}}</p>
+{{/if}}
+{{#if breed.weight.metric}}
+    <p>Weight: {{breed.weight.metric}}</p>
+{{/if}}
+{{#if breed.description}}
+    <p>Description: {{breed.description}}</p>
+{{/if}}
