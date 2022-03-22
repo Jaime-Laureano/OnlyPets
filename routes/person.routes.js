@@ -32,11 +32,14 @@ router.get("/pet-list", async (req, res) => {
 });
 
 router.get("/pet/details/:id", async (req, res) => {
+    const api_key = process.env.API_KEY;
     const petId = mongoose.Types.ObjectId(req.params.id);
     const pet = await Pet.findById(petId);
     const shelter = await Shelter.findOne({pets: petId});
-    shelter.populate("user");
-    res.render("pet-details", {pet, shelter});
+    await shelter.populate("user");
+    console.log(shelter.user);
+    let googleApiAddress = shelter.user.address;
+    res.render("pet-details", {pet, shelter, api_key, googleApiAddress});
 });
 
 router.get("/pet-list/add/:id", async (req, res) => {
