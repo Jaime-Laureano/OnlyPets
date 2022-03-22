@@ -16,10 +16,11 @@
             <h4>{{this.sex}}</h4>
             <h4>{{this.vaccinated}}</h4>
             <h4>{{this.neutered}}</h4>
-            <button><a href="/pet/edit/{{this._id}}">Details</a></button>
-            <button><a href="/pet/delete/{{this._id}}">Delete</a></button>
+            <button class="edit-bttn"><a href="/pet/edit/{{this._id}}">Details</a></button>
+            <br>
+            <button class="delete-bttn"><a href="/pet/delete/{{this._id}}">Delete</a></button>
         </div>
     {{/each}}
     <br>
-    <button><a href="/pet/add">Add</a></button>
+    <button class="add-bttn"><a href="/pet/add">Add</a></button>
 </div>
