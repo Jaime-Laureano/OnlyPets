@@ -4,6 +4,8 @@ const fileUploader = require('../config/cloudinary.config');
 const Shelter = require("../models/Shelter.model");
 const Person = require("../models/Person.model");
 const Pet = require("../models/Pet.model");
+const User = require("../models/User.model");
+const Message = require("../models/Message.model");
 
 router.get("/shelter-pets", async (req, res) => {
   const shelter = await Shelter.findOne({user: req.session.user._id});
@@ -51,6 +53,21 @@ router.get("/pet/edit/:id", async (req, res) => {
   pet.specie === "dog" ? options.specieDog = true : options.specieCat = true;
   pet.sex === "male" ? options.male = true : options.female = true;
 
+  await pet.populate({ 
+    path: "messages",
+    populate: { path: "from"}
+  });
+
+  const userMessages = pet.messages.reduce((newArray, message) => {
+    if ((!newArray.some(messageUser => messageUser.username === message.from.username)) &&
+        (message.from.username !== req.session.user.username)) {
+      newArray.push({petId: pet._id, username: message.from.username});
+    }
+    return newArray;
+  }, []);
+
+  options.messages = userMessages;
+
   res.render("pet-edit", options);
 });
 
@@ -95,6 +112,39 @@ router.get("/pet/delete/:id", async (req, res) => {
   await Pet.findByIdAndDelete(petId);
 
   res.redirect("/shelter-pets");
+});
+
+router.get("/view-messages/:idPet/:username", async (req, res) => {
+  const petId = mongoose.Types.ObjectId(req.params.idPet);
+
+  const pet = await Pet.findById(petId);
+  await pet.populate({ 
+      path: "messages",
+      populate: { path: "from"}
+  });
+
+  const user = await User.findOne({username: req.params.username});
+  const filteredMessages = pet.messages.filter((message) => {
+      if ((message.from.equals(user._id)) || (message.to.equals(user._id))) return true
+      return false;
+  });
+
+  res.render("view-messages", {pet, messages: filteredMessages});
+});
+
+router.post("/message-send/:idPet/:idUserPerson", async (req, res) => {
+  const { messageText } = req.body;
+  const petId = mongoose.Types.ObjectId(req.params.idPet);
+  const userPersonId = mongoose.Types.ObjectId(req.params.idUserPerson);
+  const userShelterId = req.session.user._id;
+
+  const message = await Message.create({message: messageText, from: userShelterId, to: userPersonId});
+  const pet = await Pet.findById(petId);
+
+  pet.messages.push(message._id);
+  await pet.save();
+
+  res.redirect("/pet/edit/" + petId);
 });
 
 module.exports = router;

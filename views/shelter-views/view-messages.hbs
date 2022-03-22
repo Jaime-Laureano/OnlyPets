@@ -1,0 +1,12 @@
+<a href="/shelter-pets">Pets</a>
+<br>
+<form action="/message-send/{{pet._id}}/{{pet.messages.0.from._id}}" method="POST">
+  {{#each messages}}
+    <p>{{this.message}}</p>
+    <p>From: {{this.from.username}}</p>
+    <br>
+  {{/each}}
+  <textarea name="messageText" cols="50" rows="5"></textarea>
+  <br>
+  <button type="submit">Send Message</button>
+</form>

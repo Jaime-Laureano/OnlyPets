@@ -43,3 +43,7 @@
     <button type="submit">Edit</button>
   </form>
 </div>
+{{#each messages}}
+  <p>{{this.username}}</p>
+  <button><a href="/view-messages/{{this.petId}}/{{this.username}}">View Messages</a></button>
+{{/each}}

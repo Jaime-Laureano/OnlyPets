@@ -23,3 +23,14 @@
   src="https://www.google.com/maps/embed/v1/place?key={{api_key}}
     &q={{googleApiAddress}}">
 </iframe>
+<br>
+<form action="/message-send/{{pet._id}}" method="POST">
+  {{#each messages}}
+    <p>{{this.message}}</p>
+    <p>From: {{this.from.username}}</p>
+    <br>
+  {{/each}}
+  <textarea name="messageText" cols="50" rows="5"></textarea>
+  <br>
+  <button type="submit">Send Message</button>
+</form>
