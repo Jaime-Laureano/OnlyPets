@@ -7,21 +7,13 @@
 } */
 
 body {
-  padding: 50px;
+  margin: 0px;
+  padding: 0px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
   /* color: white; */
 }
 
-h1 {
-  color: 15px;
-}
-
-h2 {
-  text-align: center;
-  font-size: 30px;
-}
-
-h3 {
+.error {
   color: red;
   justify-content: center;
 }
@@ -37,7 +29,7 @@ h3 {
 
 .login-signup button {
   text-decoration: none;
-  width: 250px;
+  width: 350px;
   height: 40px;
   margin: 5px;
   color: white;
@@ -45,10 +37,12 @@ h3 {
 
 .blue-button {
   background-color: blue;
+  border-radius: 50px 50px 50px 50px;
 }
 
 #signup-button {
   background-color: red;
+  border-radius: 50px 50px 50px 50px;
 }
 
 .pet-image {
@@ -61,14 +55,6 @@ h3 {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-}
-
-.flex-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: wrap;
 }
 
 .edit-bttn, .delete-bttn, .add-bttn {
@@ -86,7 +72,9 @@ h3 {
   box-shadow: 0 9px #999;
 }
 
-.edit-bttn, .delete-bttn, .add-bttn:hover {background-color: #3e8e41}
+.edit-bttn, .delete-bttn, .add-bttn:hover {
+  background-color: #3e8e41
+}
 
 .edit-bttn, .delete-bttn, .add-bttn:active {
   background-color: #3e8e41;
@@ -94,17 +82,43 @@ h3 {
   transform: translateY(4px);
 }
 
-.navbar {
-  width: 100vw;
-  background: rgb(28, 74, 128);
-  display: flex;
-  justify-content: left;
-  color: white;
+#home-img {
+  width: 40px;
+  height: 40px;
 }
 
-.welcome {
-  flex-direction: column;
+#logout-button {
+  height: 42px;
+}
+
+.navbar {
+  height: 42px;
+  width: 100%;
+  background: rgb(28, 74, 128);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+}
+
+#div-links a{
+  color: white;
+  display: block;
+  height: 40px;
+  width: 50px;
+  margin-left: 5px;
+  text-decoration: none;
+}
+
+#div-links ul{
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+#div-links li{
+  float: left;
+}
+
+#catdog-img {
+  width: 600px; 
+  height: 350px;
 }

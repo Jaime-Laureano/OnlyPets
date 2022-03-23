@@ -1,25 +1,24 @@
-<div class="welcome">
-<h1>Welcome to OnlyPets!</h1>
-    <img src="/images/catdog.jpg" alt="cat & dog" width="600px" height="400px">
+<div class="flex">
+    <!--<h1>Welcome to OnlyPets!</h1>-->
+    <img src="/images/catdog.jpg" alt="cat & dog" id="catdog-img">
 </div>
-
 <br>
-
 <div class="login-signup">
     <form action="/login" method="POST" class="flex">
-        <label for="username">Username:</label>
-        <input type="text" name="username" placeholder="Enter Username">
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" name="password" placeholder="Enter Password">
-        <br>
+        <div>
+            <label for="username">Username:</label>
+            <input type="text" name="username" placeholder="Enter Username">
+        </div>
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" name="password" placeholder="Enter Password">
+        </div>
         <button type="submit" class="blue-button">Login</button>
     </form>
     <form action="/signup" method="GET" class="flex">
         <button type="submit" id="signup-button">Sign Up</button>
-        <br>
         {{#if error}}
-            <h3>{{error}}</h3>
+            <h3 class="error">{{error}}</h3>
         {{/if}}
     </form>
 </div>

@@ -1,5 +1,3 @@
-<a href="/shelter-pets">Pets</a>
-<br>
 <form action="/message-send/{{pet._id}}/{{pet.messages.0.from._id}}" method="POST">
   {{#each messages}}
     <p>{{this.message}}</p>
