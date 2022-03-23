@@ -24,7 +24,7 @@ const path = require("path");
 module.exports = (app) => {
   app.use(session({
     secret: process.env.SECRET,
-    store: MongoStore.create({mongoUrl: "mongodb://localhost/OnlyPets"})
+    store: MongoStore.create({mongoUrl: process.env.MONGO_URI})
   }));
 
   // In development environment the app logs
