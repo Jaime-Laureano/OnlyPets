@@ -6,6 +6,9 @@
     "start": "node server.js",
     "dev": "nodemon server.js"
   },
+  "engines": {
+    "node": "v16.14.1"
+  },
   "dependencies": {
     "axios": "^0.26.1",
     "bcryptjs": "^2.4.3",
@@ -24,3 +27,4 @@
     "serve-favicon": "^2.5.0"
   }
 }
+
