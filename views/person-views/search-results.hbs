@@ -1,28 +1,41 @@
-<form action="/search" method="POST">
+<form action="/search" method="POST" class="flex">
     <h2>What are you looking for?</h2>
-    <input type="checkbox" name="dog" checked>
-    <label for="dog">Dog</label>
-    <input type="checkbox" name="cat" checked>
-    <label for="cat">Cat</label>
+    <div>
+        <input type="checkbox" name="dog" checked>
+        <label for="dog">Dog</label>
+        <input type="checkbox" name="cat" checked>
+        <label for="cat">Cat</label>
+    </div>
     <br>
-    <button type="submit">Search</button>
+    <button type="submit" class="green-button">Search</button>
 </form>
 <br>
-<div>
+<div class="flex">
     <h2>Results</h2>
-    <br>
+</div>
+<div class="flex-row">
     {{#each pets}}
-        <h4>{{this.name}}</h4>
-        <h4>{{this.specie}}</h4>
-        <a href="/breed-info/{{this._id}}"><h4>{{this.breed}}</h4></a>
-        <h4>{{this.age}}</h4>
-        <h4>{{this.size}}</h4>
-        <h4>{{this.weight}}</h4>
-        <h4>{{this.sex}}</h4>
-        <h4>{{this.vaccinated}}</h4>
-        <h4>{{this.neutered}}</h4>
-        <button><a href="/pet/details/{{this._id}}">Details</a></button>
-        <button><a href="/pet-list/add/{{this._id}}">Save</a></button>
-        <br>
+        <div class="flex">
+            <div class="div-pet">
+                <div>
+                    <img src="{{this.imageUrl}}" class="pet-image" alt="Image of the pet">
+                </div>
+                <div class="flex">
+                    <p><b>Name:</b> {{this.name}}</p>
+                    <p><b>Specie:</b> {{this.specie}}</p>
+                    <p><b>Breed:</b><a href="/breed-info/{{this._id}}"> {{this.breed}}</a></p>
+                    <p><b>Age:</b> {{this.age}} year(s)</p>
+                    <p><b>Size:</b> {{this.size}} cm</p>
+                    <p><b>Weight:</b> {{this.weight}} kg</p>
+                    <p><b>Sex:</b> {{this.sex}}</p>
+                    <p><b>Vaccinated:</b> {{this.vaccinated}}</p>
+                    <p><b>Neutered:</b> {{this.neutered}}</p>
+                </div>
+            </div>
+            <div class="div-pet-button">
+                <a href="/pet/details/{{this._id}}"><button class="edit-bttn">Details</button></a>
+                <a href="/pet-list/add/{{this._id}}"><button class="delete-bttn">Save</button></a>
+            </div>
+        </div>
     {{/each}}
 </div>

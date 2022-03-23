@@ -12,16 +12,24 @@
     <nav class="navbar">
       <div id="div-links">
         <ul>
-          <li><a href="/"><img src="/images/home.png" alt="Home Icon" id="home-img" /></a></li>
-          <li><a href="/search">Search</a></li>
-          <li><a href="/pet-list">Pet List</a></li>
-          <li><a href="/shelter-pets">Pets</a></li>
+          {{#if logout}}
+            <li><a href="/"><img src="/images/home.png" alt="Home Icon" id="home-img" /></a></li>
+          {{/if}}
+          {{#if person}}
+            <li><a href="/search"><img src="/images/home.png" alt="Home Icon" id="home-img" /></a></li>
+            <li><a href="/pet-list"><button>Pet List</button></a></li>
+          {{/if}}
+          {{#if shelter}}
+            <li><a href="/shelter-pets"><img src="/images/home.png" alt="Home Icon" id="home-img" /></a></li>
+          {{/if}}
         </ul>
       </div>
       <div id="div-logout">
-        <form action="/logout" method="POST">
-          <button type="submit" id="logout-button">Logout</button>
-        </form>
+        {{#unless logout}}
+          <form action="/logout" method="POST">
+            <button type="submit" id="logout-button">Logout</button>
+          </form>
+        {{/unless}}
       </div>
     </nav>
 

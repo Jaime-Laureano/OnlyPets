@@ -9,7 +9,7 @@
 body {
   margin: 0px;
   padding: 0px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 15px "Lucida Grande", Helvetica, Arial, sans-serif;
   /* color: white; */
 }
 
@@ -36,8 +36,11 @@ body {
 }
 
 .blue-button {
-  background-color: blue;
+  background-color:  rgb(28, 74, 128);
   border-radius: 50px 50px 50px 50px;
+  width: 390px;
+  height: 30px;
+  color: white;
 }
 
 #signup-button {
@@ -72,6 +75,22 @@ body {
   box-shadow: 0 9px #999;
 }
 
+.add-bttn {
+  font-size: 25px;
+}
+
+.edit-bttn {
+  background-color: rgb(28, 74, 128);
+}
+
+.edit-bttn:hover {
+  background-color: rgb(28, 74, 128);
+}
+
+.edit-bttn:active {
+  background-color: rgb(28, 74, 128);
+}
+
 .edit-bttn, .delete-bttn, .add-bttn:hover {
   background-color: #3e8e41
 }
@@ -99,11 +118,12 @@ body {
   justify-content: space-between;
 }
 
-#div-links a{
+#div-links button{
   color: white;
+  background-color: rgb(28, 74, 128);
   display: block;
   height: 40px;
-  width: 50px;
+  width: 60px;
   margin-left: 5px;
   text-decoration: none;
 }
@@ -121,4 +141,73 @@ body {
 #catdog-img {
   width: 600px; 
   height: 350px;
+}
+
+p {
+  margin: 0;
+}
+
+.div-pet {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 30px;
+}
+
+.div-pet-button {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.flex-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: 20px;
+}
+
+.flex-left {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column; 
+}
+
+.flex-message {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  flex-direction: row;
+  margin-left: 50px;
+}
+
+.div-message {
+  border: solid 1px black;
+  padding: 10px;
+}
+
+#breed-img {
+  width: 600px; 
+  height: 350px;
+}
+
+.green-button {
+  background-color:  #3e8e41;
+  border-radius: 50px 50px 50px 50px;
+  text-decoration: none;
+  width: 350px;
+  height: 40px;
+  margin: 5px;
+  color: white;
+}
+
+
+input[type="number"] {
+  width:50px;
 }

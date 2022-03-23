@@ -11,7 +11,7 @@ const isPerson = require("../middlewares/isPerson");
 router.use(isLoggedIn);
 
 router.get("/search", isPerson, (req, res) => {
-    res.render("search");
+    res.render("search", {person: "person"});
 });
 
 router.post("/search", isPerson, async (req, res) => {
@@ -27,16 +27,16 @@ router.post("/search", isPerson, async (req, res) => {
     }
     const pets = await Pet.find(specieFilter);
 
-    res.render("search-results", {pets});
+    res.render("search-results", {pets, person: "person"});
 });
 
 router.get("/pet-list", isPerson, async (req, res) => {
     const person = await Person.findOne({user: req.session.user._id});
-    person.populate("petList");
+    await person.populate("petList");
 
     const pets = person.petList;
 
-    res.render("pet-list", {pets});
+    res.render("pet-list", {pets, person: "person"});
 });
 
 router.get("/pet/details/:id", isPerson, async (req, res) => {
@@ -55,11 +55,11 @@ router.get("/pet/details/:id", isPerson, async (req, res) => {
         return false;
     });
 
-    const shelter = await Shelter.findOne({pets: petId});
-    await shelter.populate("user");
+    const petShelter = await Shelter.findOne({pets: petId});
+    await petShelter.populate("user");
 
-    res.render("pet-details", {pet, shelter, api_key, googleApiAddress: shelter.user.address,
-                               messages: filteredMessages});
+    res.render("pet-details", {pet, petShelter, api_key, googleApiAddress: petShelter.user.address,
+                               messages: filteredMessages, person: "person"});
 });
 
 router.get("/pet-list/add/:id", isPerson, async (req, res) => {
@@ -108,7 +108,7 @@ router.get("/breed-info/:id", isPerson, async (req, res) => {
     const responseInfo = await petApiInfoRequest(pet.specie, pet.breed);
     const responseImage = await petApiImageRequest(pet.specie, responseInfo.data[0].reference_image_id);
 
-    res.render("breed-info", {breed: responseInfo.data[0], image: responseImage.data.url});
+    res.render("breed-info", {breed: responseInfo.data[0], image: responseImage.data.url, person: "person"});
 });
 
 function petApiInfoRequest(specie, breed) {

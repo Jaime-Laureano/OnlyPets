@@ -1,33 +1,51 @@
-<h2>Pet</h2>
-<br>
-<h4>{{pet.name}}</h4>
-<h4>{{pet.specie}}</h4>
-<h4>{{pet.breed}}</h4>
-<h4>{{pet.age}}</h4>
-<h4>{{pet.size}}</h4>
-<h4>{{pet.weight}}</h4>
-<h4>{{pet.sex}}</h4>
-<h4>{{pet.vaccinated}}</h4>
-<h4>{{pet.neutered}}</h4>
-<h4>{{shelter.user.fullName}}</h4>
-<h4>{{shelter.user.address}}</h4>
-<iframe
-  width="550"
-  height="400"
-  style="border:0"
-  loading="lazy"
-  allowfullscreen
-  src="https://www.google.com/maps/embed/v1/place?key={{api_key}}
-    &q={{googleApiAddress}}">
-</iframe>
-<br>
-<form action="/message-send/{{pet._id}}" method="POST">
-  {{#each messages}}
-    <p>{{this.message}}</p>
-    <p>From: {{this.from.username}}</p>
-    <br>
-  {{/each}}
-  <textarea name="messageText" cols="50" rows="5"></textarea>
-  <br>
-  <button type="submit">Send Message</button>
-</form>
+<div class="flex">
+    <h2>Pet</h2>
+</div>
+<div class="flex-message">
+  <div class="flex-left">
+      <div class="div-pet">
+          <div>
+              <img src="{{pet.imageUrl}}" class="pet-image" alt="Image of the pet">
+          </div>
+          <div class="flex">
+              <p><b>Name:</b> {{pet.name}}</p>
+              <p><b>Specie:</b> {{pet.specie}}</p>
+              <p><b>Breed:</b><a href="/breed-info/{{pet._id}}"> {{pet.breed}}</a></p>
+              <p><b>Age:</b> {{pet.age}} year(s)</p>
+              <p><b>Size:</b> {{pet.size}} cm</p>
+              <p><b>Weight:</b> {{pet.weight}} kg</p>
+              <p><b>Sex:</b> {{pet.sex}}</p>
+              <p><b>Vaccinated:</b> {{pet.vaccinated}}</p>
+              <p><b>Neutered:</b> {{pet.neutered}}</p>
+          </div>
+      </div>
+      <div>
+          <p><b>Shelter:</b> {{petShelter.user.fullName}}</p>
+          <p><b>Address:</b> {{petShelter.user.address}}</p> 
+          <iframe
+          width="550"
+          height="400"
+          style="border:0"
+          loading="lazy"
+          allowfullscreen
+          src="https://www.google.com/maps/embed/v1/place?key={{api_key}}&q={{googleApiAddress}}">
+          </iframe>             
+      </div>
+  </div>
+  <div>
+    <form action="/message-send/{{pet._id}}" method="POST">
+      {{#each messages}}
+        <div class="div-message">
+          <p>{{this.message}}</p>
+          <br>
+          <p><b>From:</b> {{this.from.username}}</p>
+        </div>
+        <br>
+      {{/each}}
+      <textarea name="messageText" cols="50" rows="5"></textarea>
+      <br>
+      <br>
+      <button type="submit" class="blue-button">Send Message</button>
+    </form>
+  </div>
+</div>

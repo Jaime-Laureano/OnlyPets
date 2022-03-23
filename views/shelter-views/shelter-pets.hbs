@@ -1,24 +1,30 @@
-<h2>My Pets</h2>
-<br>
+<div class="flex">
+    <h2>My Pets</h2>
+</div>
 <div class="flex-row">
     {{#each pets}}
-        <br>
         <div class="flex">
-            <img src="{{this.imageUrl}}" class="pet-image" alt="Image of the pet">
-            <h4>{{this.name}}</h4>
-            <h4>{{this.specie}}</h4>
-            <h4>{{this.breed}}</h4>
-            <h4>{{this.age}}</h4>
-            <h4>{{this.size}}</h4>
-            <h4>{{this.weight}}</h4>
-            <h4>{{this.sex}}</h4>
-            <h4>{{this.vaccinated}}</h4>
-            <h4>{{this.neutered}}</h4>
-            <button class="edit-bttn"><a href="/pet/edit/{{this._id}}">Details</a></button>
-            <br>
-            <button class="delete-bttn"><a href="/pet/delete/{{this._id}}">Delete</a></button>
+            <div class="div-pet">
+                <div>
+                    <img src="{{this.imageUrl}}" class="pet-image" alt="Image of the pet">
+                </div>
+                <div class="flex">
+                    <p><b>Name:</b> {{this.name}}</p>
+                    <p><b>Specie:</b> {{this.specie}}</p>
+                    <p><b>Breed:</b> {{this.breed}}</p>
+                    <p><b>Age:</b> {{this.age}} year(s)</p>
+                    <p><b>Size:</b> {{this.size}} cm</p>
+                    <p><b>Weight:</b> {{this.weight}} kg</p>
+                    <p><b>Sex:</b> {{this.sex}}</p>
+                    <p><b>Vaccinated:</b> {{this.vaccinated}}</p>
+                    <p><b>Neutered:</b> {{this.neutered}}</p>
+                </div>
+            </div>
+            <div class="div-pet-button">
+                <a href="/pet/edit/{{this._id}}"><button class="edit-bttn">Details</button></a>
+                <a href="/pet/delete/{{this._id}}"><button class="delete-bttn">Delete</button></a>
+            </div>
         </div>
     {{/each}}
-    <br>
-    <button class="add-bttn"><a href="/pet/add">Add</a></button>
+    <a href="/pet/add"><button class="add-bttn">+</button></a>
 </div>

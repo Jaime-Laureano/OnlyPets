@@ -13,13 +13,13 @@ router.use(isLoggedIn);
 
 router.get("/shelter-pets", isShelter, async (req, res) => {
   const shelter = await Shelter.findOne({user: req.session.user._id});
-  shelter.populate("pets");
+  await shelter.populate("pets");
   const pets = shelter.pets;
-  res.render("shelter-pets", {pets});
+  res.render("shelter-pets", {pets, shelter: "shelter"});
 });
 
 router.get("/pet/add", isShelter, (req, res) => {
-  res.render("pet-add");
+  res.render("pet-add", {shelter: "shelter"});
 });
 
 router.post('/pet/add', fileUploader.single('pet-image'), isShelter, async (req, res) => {
@@ -71,6 +71,7 @@ router.get("/pet/edit/:id", isShelter, async (req, res) => {
   }, []);
 
   options.messages = userMessages;
+  options.shelter = "shelter";
 
   res.render("pet-edit", options);
 });
@@ -133,7 +134,7 @@ router.get("/view-messages/:idPet/:username", isShelter, async (req, res) => {
       return false;
   });
 
-  res.render("view-messages", {pet, messages: filteredMessages});
+  res.render("view-messages", {pet, messages: filteredMessages, shelter: "shelter"});
 });
 
 router.post("/message-send/:idPet/:idUserPerson", isShelter, async (req, res) => {

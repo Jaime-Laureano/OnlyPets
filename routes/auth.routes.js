@@ -6,7 +6,7 @@ const Person = require("../models/Person.model");
 const Shelter = require("../models/Shelter.model");
 
 router.get("/login", (req, res) => {
-  res.render("login");
+  res.render("login", {logout: "logout"});
 });
 
 router.post("/login", async (req, res) => {
@@ -14,14 +14,14 @@ router.post("/login", async (req, res) => {
   const user = await User.findOne({username: username});
 
   if (!user) {
-    res.render("login", {error: "User not found!"});
+    res.render("login", {error: "User not found!", logout: "logout"});
     return;
   }
 
   const checkPassword = await bcrypt.compare(password, user.password);
 
   if (!checkPassword) {
-    res.render("login", {error: "Wrong Password!"});
+    res.render("login", {error: "Wrong Password!", logout: "logout"});
     return;
   }
 
@@ -36,7 +36,7 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/signup", (req, res) => {
-  res.render("signup");
+  res.render("signup", {logout: "logout"});
 });
 
 router.post("/signup", async (req, res) => {
@@ -46,7 +46,7 @@ router.post("/signup", async (req, res) => {
 
   try {
     if (await (await User.find({username: username})).length > 0) {
-      res.render("signup", {error: "Username already exists!"});
+      res.render("signup", {error: "Username already exists!", logout: "logout"});
       return;
     }
 
@@ -65,7 +65,7 @@ router.post("/signup", async (req, res) => {
       await Person.create({user: user._id});
     }
   } catch (err) {
-    res.render("signup", {error: "Mandatory fields not filled!"});
+    res.render("signup", {error: "Mandatory fields not filled!", logout: "logout"});
     return;
   }
 

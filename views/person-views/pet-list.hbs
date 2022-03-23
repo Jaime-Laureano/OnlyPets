@@ -1,15 +1,29 @@
-<div>
+<div class="flex">
     <h2>Pet List</h2>
-    <br>
+</div>
+<div class="flex-row">
     {{#each pets}}
-        <br>
-        <h4>{{this.name}}</h4>
-        <h4>{{this.age}}</h4>
-        <h4>{{this.size}}</h4>
-        <h4>{{this.weight}}</h4>
-        <h4>{{this.sex}}</h4>
-        <h4>{{this.vaccinated}}</h4>
-        <button><a href="/pet/details/{{this._id}}">Details</a></button>
-        <button><a href="/pet-list/remove/{{this._id}}">Remove</a></button>
+        <div class="flex">
+            <div class="div-pet">
+                <div>
+                    <img src="{{this.imageUrl}}" class="pet-image" alt="Image of the pet">
+                </div>
+                <div class="flex">
+                    <p><b>Name:</b> {{this.name}}</p>
+                    <p><b>Specie:</b> {{this.specie}}</p>
+                    <p><b>Breed:</b><a href="/breed-info/{{this._id}}"> {{this.breed}}</a></p>
+                    <p><b>Age:</b> {{this.age}} year(s)</p>
+                    <p><b>Size:</b> {{this.size}} cm</p>
+                    <p><b>Weight:</b> {{this.weight}} kg</p>
+                    <p><b>Sex:</b> {{this.sex}}</p>
+                    <p><b>Vaccinated:</b> {{this.vaccinated}}</p>
+                    <p><b>Neutered:</b> {{this.neutered}}</p>
+                </div>
+            </div>
+            <div class="div-pet-button">
+                <a href="/pet/details/{{this._id}}"><button class="edit-bttn">Details</button></a>
+                <a href="/pet-list/remove/{{this._id}}"><button class="delete-bttn">Remove</button></a>
+            </div>
+        </div>
     {{/each}}
 </div>

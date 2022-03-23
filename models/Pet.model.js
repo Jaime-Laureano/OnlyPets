@@ -10,7 +10,7 @@ const petSchema = new Schema({
   sex: { type: String, enum: ["male", "female"] },
   vaccinated: Boolean,
   neutered: Boolean,
-  imageUrl: String,
+  imageUrl: { type: String, required: true },
   messages: [{ type: Schema.Types.ObjectId, ref: "Message" }]
 });
 

@@ -1,28 +1,27 @@
-<a href="/search">Search</a>
-<button><a href="/pet-list">Pet List</a></button>
-<br>
-<h1>Breed Information</h1>
-{{#if image}}
-    <img src="{{image}}" alt="Breed image">
-{{/if}}
-{{#if breed.name}}
-    <p>Name: {{breed.name}}</p>
-{{/if}}
-{{#if breed.life_span}}
-    <p>Life Span: {{breed.life_span}}</p>
-{{/if}}
-{{#if breed.origin}}
-    <p>Origin: {{breed.origin}}</p>
-{{/if}}
-{{#if breed.temperament}}
-    <p>Temperament: {{breed.temperament}}</p>
-{{/if}}
-{{#if breed.height.metric}}
-    <p>Height: {{breed.height.metric}}</p>
-{{/if}}
-{{#if breed.weight.metric}}
-    <p>Weight: {{breed.weight.metric}}</p>
-{{/if}}
-{{#if breed.description}}
-    <p>Description: {{breed.description}}</p>
-{{/if}}
+<div class="flex">
+    <h1>Breed Information</h1>
+    {{#if image}}
+        <img src="{{image}}" id="breed-img" alt="Breed image">
+    {{/if}}
+    {{#if breed.name}}
+        <p><b>Name:</b> {{breed.name}}</p>
+    {{/if}}
+    {{#if breed.life_span}}
+        <p><b>Life Span:</b> {{breed.life_span}}</p>
+    {{/if}}
+    {{#if breed.origin}}
+        <p><b>Origin:</b> {{breed.origin}}</p>
+    {{/if}}
+    {{#if breed.temperament}}
+        <p><b>Temperament:</b> {{breed.temperament}}</p>
+    {{/if}}
+    {{#if breed.height.metric}}
+        <p><b>Height:</b> {{breed.height.metric}}</p>
+    {{/if}}
+    {{#if breed.weight.metric}}
+        <p><b>Weight:</b> {{breed.weight.metric}}</p>
+    {{/if}}
+    {{#if breed.description}}
+        <p><b>Description:</b> {{breed.description}}</p>
+    {{/if}}
+</div>
