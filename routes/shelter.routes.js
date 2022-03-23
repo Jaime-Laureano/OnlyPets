@@ -6,19 +6,23 @@ const Person = require("../models/Person.model");
 const Pet = require("../models/Pet.model");
 const User = require("../models/User.model");
 const Message = require("../models/Message.model");
+const isLoggedIn = require("../middlewares/isLoggedIn");
+const isShelter = require("../middlewares/isShelter");
 
-router.get("/shelter-pets", async (req, res) => {
+router.use(isLoggedIn);
+
+router.get("/shelter-pets", isShelter, async (req, res) => {
   const shelter = await Shelter.findOne({user: req.session.user._id});
   shelter.populate("pets");
   const pets = shelter.pets;
   res.render("shelter-pets", {pets});
 });
 
-router.get("/pet/add", (req, res) => {
+router.get("/pet/add", isShelter, (req, res) => {
   res.render("pet-add");
 });
 
-router.post('/pet/add', fileUploader.single('pet-image'), async (req, res) => {
+router.post('/pet/add', fileUploader.single('pet-image'), isShelter, async (req, res) => {
   const { name, specieDog, specieCat, breed, age, size, weight, male, female, vaccinated, neutered } = req.body;
   const imageUrl = req.file.path;
   const shelter = await Shelter.findOne({user: req.session.user._id});
@@ -43,7 +47,7 @@ router.post('/pet/add', fileUploader.single('pet-image'), async (req, res) => {
   res.redirect("/shelter-pets");
 });
 
-router.get("/pet/edit/:id", async (req, res) => {
+router.get("/pet/edit/:id", isShelter, async (req, res) => {
   const petId = mongoose.Types.ObjectId(req.params.id);
   const pet = await Pet.findById(petId);
 
@@ -71,7 +75,7 @@ router.get("/pet/edit/:id", async (req, res) => {
   res.render("pet-edit", options);
 });
 
-router.post("/pet/edit/:id", fileUploader.single('pet-image'), async (req, res) => {
+router.post("/pet/edit/:id", fileUploader.single('pet-image'), isShelter, async (req, res) => {
   const { name, specieDog, specieCat, breed, age, size, weight, male, female, vaccinated, neutered } = req.body;
   const petId = mongoose.Types.ObjectId(req.params.id);
   const pet = await Pet.findById(petId);
@@ -96,7 +100,7 @@ router.post("/pet/edit/:id", fileUploader.single('pet-image'), async (req, res) 
   res.redirect("/shelter-pets");
 });
 
-router.get("/pet/delete/:id", async (req, res) => {
+router.get("/pet/delete/:id", isShelter, async (req, res) => {
   const petId = mongoose.Types.ObjectId(req.params.id);
   const petLists = await Person.find({petList: petId});
 
@@ -114,7 +118,7 @@ router.get("/pet/delete/:id", async (req, res) => {
   res.redirect("/shelter-pets");
 });
 
-router.get("/view-messages/:idPet/:username", async (req, res) => {
+router.get("/view-messages/:idPet/:username", isShelter, async (req, res) => {
   const petId = mongoose.Types.ObjectId(req.params.idPet);
 
   const pet = await Pet.findById(petId);
@@ -132,7 +136,7 @@ router.get("/view-messages/:idPet/:username", async (req, res) => {
   res.render("view-messages", {pet, messages: filteredMessages});
 });
 
-router.post("/message-send/:idPet/:idUserPerson", async (req, res) => {
+router.post("/message-send/:idPet/:idUserPerson", isShelter, async (req, res) => {
   const { messageText } = req.body;
   const petId = mongoose.Types.ObjectId(req.params.idPet);
   const userPersonId = mongoose.Types.ObjectId(req.params.idUserPerson);

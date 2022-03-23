@@ -5,12 +5,16 @@ const Pet = require("../models/Pet.model");
 const Person = require("../models/Person.model");
 const Shelter = require("../models/Shelter.model");
 const Message = require("../models/Message.model");
+const isLoggedIn = require("../middlewares/isLoggedIn");
+const isPerson = require("../middlewares/isPerson");
 
-router.get("/search", (req, res) => {
+router.use(isLoggedIn);
+
+router.get("/search", isPerson, (req, res) => {
     res.render("search");
 });
 
-router.post("/search", async (req, res) => {
+router.post("/search", isPerson, async (req, res) => {
     const { dog, cat } = req.body;
     let specieFilter = {};
 
@@ -26,7 +30,7 @@ router.post("/search", async (req, res) => {
     res.render("search-results", {pets});
 });
 
-router.get("/pet-list", async (req, res) => {
+router.get("/pet-list", isPerson, async (req, res) => {
     const person = await Person.findOne({user: req.session.user._id});
     person.populate("petList");
 
@@ -35,7 +39,7 @@ router.get("/pet-list", async (req, res) => {
     res.render("pet-list", {pets});
 });
 
-router.get("/pet/details/:id", async (req, res) => {
+router.get("/pet/details/:id", isPerson, async (req, res) => {
     const api_key = process.env.API_KEY;
     const petId = mongoose.Types.ObjectId(req.params.id);
 
@@ -58,7 +62,7 @@ router.get("/pet/details/:id", async (req, res) => {
                                messages: filteredMessages});
 });
 
-router.get("/pet-list/add/:id", async (req, res) => {
+router.get("/pet-list/add/:id", isPerson, async (req, res) => {
     const petId = mongoose.Types.ObjectId(req.params.id);
 
     const person = await Person.findOne({user: req.session.user._id});
@@ -71,7 +75,7 @@ router.get("/pet-list/add/:id", async (req, res) => {
     res.redirect("/search");
 });
 
-router.get("/pet-list/remove/:id", async (req, res) => {
+router.get("/pet-list/remove/:id", isPerson, async (req, res) => {
     const petId = mongoose.Types.ObjectId(req.params.id);
 
     const person = await Person.findOneAndUpdate({user: req.session.user._id}, {$pull: {petList: {$in: [petId]}}});
@@ -79,7 +83,7 @@ router.get("/pet-list/remove/:id", async (req, res) => {
     res.redirect("/pet-list");
 });
 
-router.post("/message-send/:id", async (req, res) => {
+router.post("/message-send/:id", isPerson, async (req, res) => {
     const { messageText } = req.body;
     const petId = mongoose.Types.ObjectId(req.params.id);
     const userPersonId = req.session.user._id;
@@ -96,7 +100,7 @@ router.post("/message-send/:id", async (req, res) => {
     res.redirect("/pet/details/" + petId);
 });
 
-router.get("/breed-info/:id", async (req, res) => {
+router.get("/breed-info/:id", isPerson, async (req, res) => {
     const petId = mongoose.Types.ObjectId(req.params.id);
 
     const pet = await Pet.findById(petId);
