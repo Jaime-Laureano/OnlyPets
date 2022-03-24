@@ -106,8 +106,11 @@ router.get("/breed-info/:id", isPerson, async (req, res) => {
     const pet = await Pet.findById(petId);
 
     const responseInfo = await petApiInfoRequest(pet.specie, pet.breed);
+    let responseImage = {data: {url: ""}};
     if (responseInfo.data[0]) {
-        const responseImage = await petApiImageRequest(pet.specie, responseInfo.data[0].reference_image_id);
+        if (responseInfo.data[0].reference_image_id) {
+            responseImage = await petApiImageRequest(pet.specie, responseInfo.data[0].reference_image_id);
+        }
         res.render("breed-info", {breed: responseInfo.data[0], image: responseImage.data.url, person: "person"});
     } else {
         res.render("breed-info", {image: "/images/catdog.jpg", notFound: "not found", person: "person"});
