@@ -58,5 +58,5 @@ module.exports = (app) => {
   app.use(express.static(path.join(__dirname, "..", "public")));
 
   // Handles access to the favicon
-  app.use(favicon(path.join(__dirname, "..", "public", "images", "OPLogo2.png")));
+  app.use(favicon(path.join(__dirname, "..", "public", "images", "logoFavicon.ico")));
 };
