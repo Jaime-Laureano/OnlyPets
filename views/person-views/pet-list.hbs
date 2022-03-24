@@ -8,7 +8,7 @@
                 <div>
                     <img src="{{this.imageUrl}}" class="pet-image" alt="Image of the pet">
                 </div>
-                <div class="flex">
+                <div class="flex-left">
                     <p><b>Name:</b> {{this.name}}</p>
                     <p><b>Specie:</b> {{this.specie}}</p>
                     <p><b>Breed:</b><a href="/breed-info/{{this._id}}"> {{this.breed}}</a></p>
@@ -21,8 +21,8 @@
                 </div>
             </div>
             <div class="div-pet-button">
-                <a href="/pet/details/{{this._id}}"><button class="edit-bttn">Details</button></a>
-                <a href="/pet-list/remove/{{this._id}}"><button class="delete-bttn">Remove</button></a>
+                <a href="/pet/details/{{this._id}}"><button class="small-blue-button">Details</button></a>
+                <a href="/pet-list/remove/{{this._id}}"><button class="small-red-button">Remove</button></a>
             </div>
         </div>
     {{/each}}

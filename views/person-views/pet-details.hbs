@@ -7,7 +7,7 @@
           <div>
               <img src="{{pet.imageUrl}}" class="pet-image" alt="Image of the pet">
           </div>
-          <div class="flex">
+          <div class="flex-left">
               <p><b>Name:</b> {{pet.name}}</p>
               <p><b>Specie:</b> {{pet.specie}}</p>
               <p><b>Breed:</b><a href="/breed-info/{{pet._id}}"> {{pet.breed}}</a></p>
@@ -26,10 +26,9 @@
           width="550"
           height="400"
           style="border:0"
-          loading="lazy"
           allowfullscreen
           src="https://www.google.com/maps/embed/v1/place?key={{api_key}}&q={{googleApiAddress}}">
-          </iframe>             
+          </iframe>        
       </div>
   </div>
   <div>
