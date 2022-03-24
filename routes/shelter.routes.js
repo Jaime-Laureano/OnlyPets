@@ -23,14 +23,14 @@ router.get("/pet/add", isShelter, (req, res) => {
 });
 
 router.post('/pet/add', fileUploader.single('pet-image'), isShelter, async (req, res) => {
-  const { name, specieDog, specieCat, breed, age, size, weight, male, female, vaccinated, neutered } = req.body;
+  const { name, speciesDog, speciesCat, breed, age, size, weight, male, female, vaccinated, neutered } = req.body;
   const imageUrl = req.file.path;
   const shelter = await Shelter.findOne({user: req.session.user._id});
 
   const pet = new Pet({
     imageUrl: imageUrl,
     name: name,
-    specie: specieDog ? "dog" : "cat",
+    species: speciesDog ? "dog" : "cat",
     breed: breed,
     age: age,
     size: size,
@@ -54,7 +54,7 @@ router.get("/pet/edit/:id", isShelter, async (req, res) => {
   let options = {pet};
   if (pet.vaccinated) options.vaccinatedChecked = true;
   if (pet.neutered) options.neuteredChecked = true;
-  pet.specie === "dog" ? options.specieDog = true : options.specieCat = true;
+  pet.species === "dog" ? options.speciesDog = true : options.speciesCat = true;
   pet.sex === "male" ? options.male = true : options.female = true;
 
   await pet.populate({ 
@@ -77,7 +77,7 @@ router.get("/pet/edit/:id", isShelter, async (req, res) => {
 });
 
 router.post("/pet/edit/:id", fileUploader.single('pet-image'), isShelter, async (req, res) => {
-  const { name, specieDog, specieCat, breed, age, size, weight, male, female, vaccinated, neutered } = req.body;
+  const { name, speciesDog, speciesCat, breed, age, size, weight, male, female, vaccinated, neutered } = req.body;
   const petId = mongoose.Types.ObjectId(req.params.id);
   const pet = await Pet.findById(petId);
   
@@ -88,7 +88,7 @@ router.post("/pet/edit/:id", fileUploader.single('pet-image'), isShelter, async 
   }
 
   pet.name = name;
-  pet.specie = specieDog ? "dog" : "cat";
+  pet.species = speciesDog ? "dog" : "cat";
   pet.breed = breed;
   pet.age = age;
   pet.size = size;
@@ -103,11 +103,11 @@ router.post("/pet/edit/:id", fileUploader.single('pet-image'), isShelter, async 
 
 router.get("/pet/delete/:id", isShelter, async (req, res) => {
   const petId = mongoose.Types.ObjectId(req.params.id);
-  const petLists = await Person.find({petList: petId});
+  const persons = await Person.find({petList: petId});
 
-  petLists.forEach(async (petList) => {
-    petList.splice(petList.indexOf(petId), 1);
-    await petList.save();
+  persons.forEach(async (person) => {
+    person.petList.splice(person.petList.indexOf(petId), 1);
+    await person.save();
   });
 
   const shelter = await Shelter.findOne({user: req.session.user._id});

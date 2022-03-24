@@ -16,16 +16,16 @@ router.get("/search", isPerson, (req, res) => {
 
 router.post("/search", isPerson, async (req, res) => {
     const { dog, cat } = req.body;
-    let specieFilter = {};
+    let speciesFilter = {};
 
     if ((dog) && (!cat)) {
-        specieFilter = {specie: "dog"};
+        speciesFilter = {species: "dog"};
     } else if ((!dog) && (cat)) {
-        specieFilter = {specie: "cat"};
+        speciesFilter = {species: "cat"};
     } else {
-        specieFilter = { $or: [{specie: "dog"}, {specie: "cat"}]};
+        speciesFilter = { $or: [{species: "dog"}, {species: "cat"}]};
     }
-    const pets = await Pet.find(specieFilter);
+    const pets = await Pet.find(speciesFilter);
 
     res.render("search-results", {pets, person: "person"});
 });
@@ -105,11 +105,11 @@ router.get("/breed-info/:id", async (req, res) => {
 
     const pet = await Pet.findById(petId);
 
-    const responseInfo = await petApiInfoRequest(pet.specie, pet.breed);
+    const responseInfo = await petApiInfoRequest(pet.species, pet.breed);
     let responseImage = {data: {url: ""}};
     if (responseInfo.data[0]) {
         if (responseInfo.data[0].reference_image_id) {
-            responseImage = await petApiImageRequest(pet.specie, responseInfo.data[0].reference_image_id);
+            responseImage = await petApiImageRequest(pet.species, responseInfo.data[0].reference_image_id);
         }
         if (req.session.role === "person") {
             res.render("breed-info", {breed: responseInfo.data[0], image: responseImage.data.url, person: "person"});
@@ -125,10 +125,10 @@ router.get("/breed-info/:id", async (req, res) => {
     }
 });
 
-function petApiInfoRequest(specie, breed) {
+function petApiInfoRequest(species, breed) {
     let apiKey;
     let apiUrl;
-    switch (specie) {
+    switch (species) {
         case "cat":
             apiKey = process.env.CATAPI_KEY;
             apiUrl = 'https://api.thecatapi.com/v1/breeds/search';
@@ -141,10 +141,10 @@ function petApiInfoRequest(specie, breed) {
     return axios.get(apiUrl, { params: { q: breed} });
 }
 
-function petApiImageRequest(specie, image_id) {
+function petApiImageRequest(species, image_id) {
     let apiKey;
     let apiUrl;
-    switch (specie) {
+    switch (species) {
         case "cat":
             apiKey = process.env.CATAPI_KEY;
             apiUrl = 'https://api.thecatapi.com/v1/images/' + image_id;
