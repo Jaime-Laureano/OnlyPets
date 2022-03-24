@@ -15,8 +15,8 @@
               <p><b>Size:</b> {{pet.size}} cm</p>
               <p><b>Weight:</b> {{pet.weight}} kg</p>
               <p><b>Sex:</b> {{pet.sex}}</p>
-              <p><b>Vaccinated:</b> {{pet.vaccinated}}</p>
-              <p><b>Neutered:</b> {{pet.neutered}}</p>
+              <p><b>Vaccinated:</b><img class="boolean" {{#if pet.vaccinated}} src="/images/true.png" {{else}} src="/images/false.png" {{/if}} alt="Vaccinated"></p>
+              <p><b>Neutered:</b><img class="boolean" {{#if pet.neutered}} src="/images/true.png" {{else}} src="/images/false.png" {{/if}} alt="Neutered"></p>
           </div>
       </div>
       <div>

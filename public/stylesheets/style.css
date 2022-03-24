@@ -226,6 +226,11 @@ p {
   color: white;
 }
 
+.boolean {
+  height: 15px;
+  width: 15px;
+}
+
 input {
   margin: 1px;
 }

@@ -28,8 +28,8 @@
                     <p><b>Size:</b> {{this.size}} cm</p>
                     <p><b>Weight:</b> {{this.weight}} kg</p>
                     <p><b>Sex:</b> {{this.sex}}</p>
-                    <p><b>Vaccinated:</b> {{this.vaccinated}}</p>
-                    <p><b>Neutered:</b> {{this.neutered}}</p>
+                    <p><b>Vaccinated:</b><img class="boolean" {{#if this.vaccinated}} src="/images/true.png" {{else}} src="/images/false.png" {{/if}} alt="Vaccinated"></p>
+                    <p><b>Neutered:</b><img class="boolean" {{#if this.neutered}} src="/images/true.png" {{else}} src="/images/false.png" {{/if}} alt="Neutered"></p>
                 </div>
             </div>
             <div class="div-pet-button">
