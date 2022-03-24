@@ -3,11 +3,7 @@
   <br>
   <form action="/message-send/{{pet._id}}/{{pet.messages.0.from._id}}" method="POST">
     {{#each messages}}
-      <div class="div-message">
-        <p>{{this.message}}</p>
-        <br>
-        <p><b>From:</b> {{this.from.username}}</p>
-      </div>
+      {{> divMessage this}}
       <br>
     {{/each}}
     <textarea name="messageText" cols="50" rows="5"></textarea>

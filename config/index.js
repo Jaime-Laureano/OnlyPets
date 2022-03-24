@@ -52,6 +52,8 @@ module.exports = (app) => {
     return value === "male";
   });
 
+  hbs.registerPartials(path.join(__dirname, "..", "views/partials"));
+
     // Handles access to the public folder
   app.use(express.static(path.join(__dirname, "..", "public")));
 

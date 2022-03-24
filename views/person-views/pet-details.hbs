@@ -3,22 +3,7 @@
 </div>
 <div class="flex-message">
   <div class="flex-left">
-      <div class="div-pet">
-          <div>
-              <img src="{{pet.imageUrl}}" class="pet-image" alt="Image of the pet">
-          </div>
-          <div class="flex-left">
-              <p><b>Name:</b> {{pet.name}}</p>
-              <p><b>Specie: </b><img class="specie" {{#if (isDog pet.specie)}} src="/images/dog.png" {{else}} src="/images/cat.png" {{/if}} alt="Image of the specie"></p>
-              <p><b>Breed:</b><a href="/breed-info/{{pet._id}}"> {{pet.breed}}</a></p>
-              <p><b>Age:</b> {{pet.age}} year(s)</p>
-              <p><b>Size:</b> {{pet.size}} cm</p>
-              <p><b>Weight:</b> {{pet.weight}} kg</p>
-              <p><b>Sex: </b><img class="sex" {{#if (isMale this.sex)}} src="/images/male.png" {{else}} src="/images/female.png" {{/if}} alt="Image of the sex symbol"></p>
-              <p><b>Vaccinated:</b><img class="boolean" {{#if pet.vaccinated}} src="/images/true.png" {{else}} src="/images/false.png" {{/if}} alt="Vaccinated"></p>
-              <p><b>Neutered:</b><img class="boolean" {{#if pet.neutered}} src="/images/true.png" {{else}} src="/images/false.png" {{/if}} alt="Neutered"></p>
-          </div>
-      </div>
+      {{> divPet pet}}
       <div>
           <p><b>Shelter:</b> {{petShelter.user.fullName}}</p>
           <p><b>Address:</b> {{petShelter.user.address}}</p> 
@@ -34,11 +19,7 @@
   <div>
     <form action="/message-send/{{pet._id}}" method="POST">
       {{#each messages}}
-        <div class="div-message">
-          <p>{{this.message}}</p>
-          <br>
-          <p><b>From:</b> {{this.from.username}}</p>
-        </div>
+        {{> divMessage this}}
         <br>
       {{/each}}
       <textarea name="messageText" cols="50" rows="5"></textarea>

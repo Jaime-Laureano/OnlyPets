@@ -100,7 +100,7 @@ router.post("/message-send/:id", isPerson, async (req, res) => {
     res.redirect("/pet/details/" + petId);
 });
 
-router.get("/breed-info/:id", isPerson, async (req, res) => {
+router.get("/breed-info/:id", async (req, res) => {
     const petId = mongoose.Types.ObjectId(req.params.id);
 
     const pet = await Pet.findById(petId);
@@ -111,9 +111,17 @@ router.get("/breed-info/:id", isPerson, async (req, res) => {
         if (responseInfo.data[0].reference_image_id) {
             responseImage = await petApiImageRequest(pet.specie, responseInfo.data[0].reference_image_id);
         }
-        res.render("breed-info", {breed: responseInfo.data[0], image: responseImage.data.url, person: "person"});
+        if (req.session.role === "person") {
+            res.render("breed-info", {breed: responseInfo.data[0], image: responseImage.data.url, person: "person"});
+        } else {
+            res.render("breed-info", {breed: responseInfo.data[0], image: responseImage.data.url, shelter: "shelter"});
+        }
     } else {
-        res.render("breed-info", {image: "/images/catdog.jpg", notFound: "not found", person: "person"});
+        if (req.session.role === "person") {
+            res.render("breed-info", {image: "/images/catdog.jpg", notFound: "not found", person: "person"});
+        } else {
+            res.render("breed-info", {image: "/images/catdog.jpg", notFound: "not found", shelter: "shelter"});
+        }
     }
 });
 

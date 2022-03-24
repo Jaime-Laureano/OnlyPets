@@ -16,22 +16,7 @@
 <div class="flex-row">
     {{#each pets}}
         <div class="flex">
-            <div class="div-pet">
-                <div>
-                    <img src="{{this.imageUrl}}" class="pet-image" alt="Image of the pet">
-                </div>
-                <div class="flex-left">
-                    <p><b>Name:</b> {{this.name}}</p>
-                    <p><b>Specie: </b><img class="specie" {{#if (isDog this.specie)}} src="/images/dog.png" {{else}} src="/images/cat.png" {{/if}} alt="Image of the specie"></p>
-                    <p><b>Breed:</b><a href="/breed-info/{{this._id}}"> {{this.breed}}</a></p>
-                    <p><b>Age:</b> {{this.age}} year(s)</p>
-                    <p><b>Size:</b> {{this.size}} cm</p>
-                    <p><b>Weight:</b> {{this.weight}} kg</p>
-                    <p><b>Sex: </b><img class="sex" {{#if (isMale this.sex)}} src="/images/male.png" {{else}} src="/images/female.png" {{/if}} alt="Image of the sex symbol"></p>
-                    <p><b>Vaccinated:</b><img class="boolean" {{#if this.vaccinated}} src="/images/true.png" {{else}} src="/images/false.png" {{/if}} alt="Vaccinated"></p>
-                    <p><b>Neutered:</b><img class="boolean" {{#if this.neutered}} src="/images/true.png" {{else}} src="/images/false.png" {{/if}} alt="Neutered"></p>
-                </div>
-            </div>
+            {{> divPet this}}
             <div class="div-pet-button">
                 <a href="/pet/details/{{this._id}}"><button class="small-blue-button">Details</button></a>
                 <a href="/pet-list/add/{{this._id}}"><button class="small-orange-button">Save</button></a>
