@@ -1,16 +1,12 @@
-/* html { 
-  background: url('/images/background2.jpg') no-repeat center center fixed; 
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-} */
+ html { 
+  background: url('/images/OPLogo2.png');
+} 
 
 body {
   margin: 0px;
   padding: 0px;
-  font: 15px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: lightgreen;
+  font-size: 15px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .error {
@@ -38,7 +34,7 @@ body {
 .blue-button {
   background-color:  rgb(28, 74, 128);
   border-radius: 50px 50px 50px 50px;
-  width: 390px;
+  width: 420px;
   height: 30px;
   color: white;
 }
@@ -59,6 +55,7 @@ body {
 .pet-image {
   width: 200px;
   height: 200px;
+  border-radius: 50px;
 }
 
 .flex {
@@ -66,6 +63,46 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.flex-pet-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 50px 50px 50px 50px;
+  background-color: lightgrey;
+  margin: 15px;
+  box-shadow: 9px 0 gray;
+}
+
+.div-gray-shadow-center {
+  display: flex;
+  justify-content: center;
+  border-radius: 20px 20px 20px 20px;
+  background-color: lightgrey;
+  box-shadow: 9px 0 gray;
+  padding: 0.5vw;
+  margin: 0.5vw;
+}
+
+.div-gray-shadow-left {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 50px 50px 50px 50px;
+  background-color: lightgrey;
+  box-shadow: 9px 0 gray;
+  padding: 1.2vw;
+}
+
+.div-gray-shadow-search {
+  border-radius: 50px 50px 50px 50px;
+  background-color: lightgrey;
+  box-shadow: 9px 0 gray;
+  margin-left: 35vw;
+  margin-right: 35vw;
+  margin-top: 1vh;
 }
 
 .edit-bttn, .delete-bttn, .add-bttn {
@@ -77,10 +114,10 @@ body {
   text-decoration: none;
   outline: none;
   color: white;
-  background-color: #4CAF50;
+  background-color:  rgb(28, 74, 128);
   border: none;
   border-radius: 15px;
-  box-shadow: 0 9px #999;
+  box-shadow: 9px 0 #999;
 }
 
 .add-bttn {
@@ -88,12 +125,12 @@ body {
 }
 
 .edit-bttn, .delete-bttn, .add-bttn:hover {
-  background-color: #3e8e41
+  background-color:  rgb(28, 74, 128)
 }
 
 .edit-bttn, .delete-bttn, .add-bttn:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
+  background-color:  rgb(28, 74, 128);
+  box-shadow: 5px 0 #666;
   transform: translateY(4px);
 }
 
@@ -143,6 +180,7 @@ body {
 
 p {
   margin: 2px;
+  max-width: 50vw;
 }
 
 .div-pet {
@@ -151,7 +189,7 @@ p {
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-  margin: 50px 30px 0px 30px;
+  margin: 15px;
 }
 
 .div-pet-button {
@@ -186,18 +224,22 @@ p {
 }
 
 .div-message {
-  border: solid 1px black;
-  padding: 10px;
+  border-radius: 20px 20px 20px 20px;
+  background-color: lightgrey;
+  box-shadow: 9px 0 gray;
+  padding: 0.5vw;
+  margin: 0.5vw;
 }
 
 #breed-img {
   width: 600px; 
   height: 350px;
+  border-radius: 30px;
 }
 
 #oplogo-img {
-  width: 400px; 
-  height: 300px;
+  width: 500px; 
+  height: 390px;
 }
 
 .green-button {
@@ -205,6 +247,16 @@ p {
   border-radius: 50px 50px 50px 50px;
   text-decoration: none;
   width: 350px;
+  height: 40px;
+  margin: 5px;
+  color: white;
+}
+
+.green-button-edit {
+  background-color:  #3e8e41;
+  border-radius: 50px 50px 50px 50px;
+  text-decoration: none;
+  width: 30vw;
   height: 40px;
   margin: 5px;
   color: white;
@@ -218,8 +270,8 @@ p {
   color: white;
 }
 
-.small-orange-button {
-  background-color:  rgb(150, 80, 0);
+.small-green-button {
+  background-color:  #3e8e41;
   border-radius: 50px 50px 50px 50px;
   width: 100px;
   height: 30px;
@@ -260,10 +312,21 @@ p {
 .pet-image-edit {
   width: 270px;
   height: 270px;
+  border-radius: 30px 30px 30px 30px;
+  margin: 0.5vw;
 }
 
 input {
   margin: 1px;
+}
+
+form {
+  margin-block-end: 0;
+}
+
+textarea {
+  border-radius: 20px 20px 20px 20px;
+  padding: 1vw;
 }
 
 input[type="number"] {

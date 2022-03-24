@@ -77,10 +77,10 @@ router.get("/pet/edit/:id", isShelter, async (req, res) => {
 });
 
 router.post("/pet/edit/:id", fileUploader.single('pet-image'), isShelter, async (req, res) => {
-  const { name, speciesDog, speciesCat, breed, age, size, weight, male, female, vaccinated, neutered } = req.body;
+  const { name, speciesDog, speciesCat, breed, age, size, weight, male, female, vaccinated, neutered, existingImage } = req.body;
   const petId = mongoose.Types.ObjectId(req.params.id);
   const pet = await Pet.findById(petId);
-  
+
   if (req.file) {
     pet.imageUrl = req.file.path;
   } else {

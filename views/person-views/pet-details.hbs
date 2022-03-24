@@ -1,10 +1,14 @@
 <div class="flex">
+  <div class="div-gray-shadow-center">
     <h2>Pet</h2>
+  </div>
 </div>
 <div class="flex-message">
   <div class="flex-left">
-      {{> divPet pet}}
-      <div>
+      <div class="flex-pet-card">
+        {{> divPet pet}}
+      </div>
+      <div class="div-gray-shadow-left">
           <p><b>Shelter:</b> {{petShelter.user.fullName}}</p>
           <p><b>Address:</b> {{petShelter.user.address}}</p> 
           <iframe

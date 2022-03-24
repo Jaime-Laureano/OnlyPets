@@ -1,9 +1,11 @@
 <div class="flex">
-    <h2>My Pets</h2>
+    <div class="div-gray-shadow-center">
+        <h2>My Pets</h2>
+    </div>
 </div>
 <div class="flex-row">
     {{#each pets}}
-        <div class="flex">
+        <div class="flex-pet-card">
             {{> divPet this}}
             <div class="div-pet-button">
                 <a href="/pet/edit/{{this._id}}"><button class="small-blue-button">Details</button></a>

@@ -1,25 +1,11 @@
-<form action="/search" method="POST" class="flex">
-    <h2>What are you looking for?</h2>
-    <div>
-        <input type="checkbox" name="dog" checked>
-        <img class="species" src="/images/dog.png" alt="Image of a dog">
-        <input type="checkbox" name="cat" checked>
-        <img class="species" src="/images/cat.png" alt="Image of a cat">
-    </div>
-    <br>
-    <button type="submit" class="green-button">Search</button>
-</form>
-<br>
-<div class="flex">
-    <h3>Results</h3>
-</div>
+{{> searchForm}}
 <div class="flex-row">
     {{#each pets}}
-        <div class="flex">
+        <div class="flex-pet-card">
             {{> divPet this}}
             <div class="div-pet-button">
                 <a href="/pet/details/{{this._id}}"><button class="small-blue-button">Details</button></a>
-                <a href="/pet-list/add/{{this._id}}"><button class="small-orange-button">Save</button></a>
+                <a href="/pet-list/add/{{this._id}}"><button class="small-green-button">Save</button></a>
             </div>
         </div>
     {{/each}}

@@ -1,46 +1,51 @@
 <div id="div-pet-add" class="flex">
-  <h2>Add A Pet</h2>
-  <form action="/pet/add" method="POST" enctype="multipart/form-data">
-    <div>
-      <label for="pet-image">Image:</label>
-      <input type="file" name="pet-image" required />
-    </div>
-    <div>
-      <label for="name">Name:</label>
-      <input type="text" name="name" value="" placeholder="Enter Pet Name" required />
-      <label for="species">Species:</label>
-      <input type="checkbox" name="speciesDog" />
-      <img class="species" src="/images/dog.png" alt="Image of a dog">
-      <input type="checkbox" name="speciesCat" />
-      <img class="species" src="/images/cat.png" alt="Image of a cat">
-    </div>
-    <div>
-      <label for="breed">Breed:</label>
-      <input type="text" name="breed" value="" placeholder="Enter Pet Breed" required />
-    </div>
-    <div>
-      <label for="age">Age:</label>
-      <input type="number" name="age" value="" size="5" required/>
-      <label for="size">Size:</label>
-      <input type="number" name="size" value="" required />
-      <label for="weight">Weight:</label>
-      <input type="number" name="weight" value="" required />
-    </div>
-    <div>
-      <label for="sex">Sex:</label>
-      <input type="checkbox" name="male" />
-      <img class="sex" src="/images/male.png" alt="Image of the male symbol">
-      <input type="checkbox" name="female" />
-      <img class="sex" src="/images/female.png" alt="Image of the female symbol">
-    </div>
-    <div>
-      <label for="vaccinated">Vaccinated:</label>
-      <input type="checkbox" name="vaccinated" />
-    </div>
-    <div>
-      <label for="neutered">Neutered:</label>
-      <input type="checkbox" name="neutered" />
-    </div>
-    <button type="submit" class="green-button">Add Pet</button>
-  </form>
+  <div class="div-gray-shadow-center">
+    <h2>Add Pet</h2>
+  </div>
+  <div class="div-gray-shadow-center">
+    <form action="/pet/add" method="POST" enctype="multipart/form-data">
+        <div>
+          <label for="pet-image">Image:</label>
+          <input type="file" name="pet-image" required />
+        </div>
+        <div>
+          <label for="name">Name:</label>
+          <input type="text" name="name" value="" placeholder="Enter Pet Name" required />
+          <label for="species">Species:</label>
+          <input type="checkbox" name="speciesDog" />
+          <img class="species" src="/images/dog.png" alt="Image of a dog">
+          <input type="checkbox" name="speciesCat" />
+          <img class="species" src="/images/cat.png" alt="Image of a cat">
+        </div>
+        <div>
+          <label for="breed">Breed:</label>
+          <input type="text" name="breed" value="" placeholder="Enter Pet Breed" required />
+        </div>
+        <div>
+          <label for="age">Age:</label>
+          <input type="number" name="age" value="" size="5" required/>
+          <label for="size">Size:</label>
+          <input type="number" name="size" value="" required />
+          <label for="weight">Weight:</label>
+          <input type="number" name="weight" value="" required />
+        </div>
+        <div>
+          <label for="sex">Sex:</label>
+          <input type="checkbox" name="male" />
+          <img class="sex" src="/images/male.png" alt="Image of the male symbol">
+          <input type="checkbox" name="female" />
+          <img class="sex" src="/images/female.png" alt="Image of the female symbol">
+        </div>
+        <div>
+          <label for="vaccinated">Vaccinated:</label>
+          <input type="checkbox" name="vaccinated" />
+        </div>
+        <div>
+          <label for="neutered">Neutered:</label>
+          <input type="checkbox" name="neutered" />
+        </div>
+        <br>
+        <button type="submit" class="green-button-edit">Add Pet</button>
+      </form>
+  </div>
 </div>

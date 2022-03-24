@@ -1,29 +1,30 @@
 <div class="login-signup">
-    <br>
-    <br>
-    <form action="/signup" method="POST" class="flex">
-        <div>
-            <label for="fullName">Full Name:</label>
-            <input type="text" name="fullName" placeholder="Enter Full Name" required>
-        </div>
-        <div>
-            <label for="username">Username:</label>
-            <input type="text" name="username" placeholder="Enter Username" required>
-        </div>
-        <div>
-            <label for="password">Password:</label>
-            <input type="password" name="password" placeholder="Enter Password" required>
-        </div>
-        <div>
-            <label for="address">Address:</label>
-            <input type="text" name="address" placeholder="Enter Address" required>
-        </div>
-        <div>
-            <input type="checkbox" name="isShelter">
-            <label for="isShelter">Shelter</label>
-        </div>
-        <button type="submit" class="blue-button">Sign Up</button>
-    </form>
+    <div class="div-gray-shadow-search">
+        <br>
+        <form action="/signup" method="POST" class="flex">
+            <div>
+                <label for="fullName">Full Name:</label>
+                <input type="text" name="fullName" placeholder="Enter Full Name" required>
+            </div>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" name="username" placeholder="Enter Username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" name="password" placeholder="Enter Password" required>
+            </div>
+            <div>
+                <label for="address">Address:</label>
+                <input type="text" name="address" placeholder="Enter Address" required>
+            </div>
+            <div>
+                <input type="checkbox" name="isShelter">
+                <label for="isShelter">Shelter</label>
+            </div>
+            <button type="submit" class="blue-button">Sign Up</button>
+        </form>
+    </div>
     <br>
     {{#if error}}
         <h3 class="error">{{error}}</h3>

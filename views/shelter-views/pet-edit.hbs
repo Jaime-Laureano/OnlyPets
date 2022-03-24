@@ -1,62 +1,70 @@
 <div id="div-pet-edit" class="flex">
-  <h2>Edit Pet</h2>
-  <div class="div-pet">
-    <div>
-      <img src="{{pet.imageUrl}}" class="pet-image-edit" alt="Image of the pet">
-    </div>
-    <div class="flex-left">
-      <form action="/pet/edit/{{pet._id}}" method="POST" enctype="multipart/form-data">
-          <div>
-            <label for="pet-image">Image:</label>
-            <input type="file" name="pet-image" class="form-control-file" required />
-          </div>
-          <div>
-            <label for="name">Name:</label>
-            <input type="text" name="name" value="{{pet.name}}" required />
-            <label for="species">Species:</label>
-            <input type="checkbox" name="speciesDog" {{#if speciesDog}} checked {{/if}} />
-            <img class="species" src="/images/dog.png" alt="Image of a dog">
-            <input type="checkbox" name="speciesCat" {{#if speciesCat}} checked {{/if}} />
-            <img class="species" src="/images/cat.png" alt="Image of a cat">
-          </div>
-          <div>
-            <label for="breed">Breed:</label>
-            <input type="text" name="breed" value="{{pet.breed}}" required />
-          </div>
-          <div>
-            <label for="age">Age:</label>
-            <input type="number" name="age" value="{{pet.age}}" required />
-            <label for="size">Size:</label>
-            <input type="number" name="size" value="{{pet.size}}" required />
-            <label for="weight">Weight:</label>
-            <input type="number" name="weight" value="{{pet.weight}}" required />
-          </div>
-          <div>
-            <label for="sex">Sex:</label>
-            <input type="checkbox" name="male" {{#if male}} checked {{/if}} />
-            <img class="sex" src="/images/male.png" alt="Image of the male symbol">
-            <input type="checkbox" name="female" {{#if female}} checked {{/if}} />
-            <img class="sex" src="/images/female.png" alt="Image of the female symbol">
-          </div>
-          <div>
-            <label for="vaccinated">Vaccinated:</label>
-            <input type="checkbox" name="vaccinated" {{#if vaccinatedChecked}} checked {{/if}} />
-          </div>
-          <div>
-            <label for="neutered">Neutered:</label>
-            <input type="checkbox" name="neutered" {{#if neuteredChecked}} checked {{/if}} />
-          </div>
-          <button type="submit" class="green-button">Edit</button>
-        </form>
-    </div>
+  <div class="div-gray-shadow-center">
+    <h2>Edit Pet</h2>
+  </div>
+  <div class="div-gray-shadow-center">
+    <div class="div-pet">
+        <div>
+          <img src="{{pet.imageUrl}}" class="pet-image-edit" alt="Image of the pet">
+        </div>
+        <div class="flex-left">
+          <form action="/pet/edit/{{pet._id}}" method="POST" enctype="multipart/form-data">
+              <div>
+                <label for="pet-image">Image:</label>
+                <input type="file" name="pet-image" class="form-control-file" />
+                <input type="text" name="existingImage" hidden value="{{pet.imageUrl}}">
+              </div>
+              <div>
+                <label for="name">Name:</label>
+                <input type="text" name="name" value="{{pet.name}}" required />
+                <label for="species">Species:</label>
+                <input type="checkbox" name="speciesDog" {{#if speciesDog}} checked {{/if}} />
+                <img class="species" src="/images/dog.png" alt="Image of a dog">
+                <input type="checkbox" name="speciesCat" {{#if speciesCat}} checked {{/if}} />
+                <img class="species" src="/images/cat.png" alt="Image of a cat">
+              </div>
+              <div>
+                <label for="breed">Breed:</label>
+                <input type="text" name="breed" value="{{pet.breed}}" required />
+              </div>
+              <div>
+                <label for="age">Age:</label>
+                <input type="number" name="age" value="{{pet.age}}" required />
+                <label for="size">Size:</label>
+                <input type="number" name="size" value="{{pet.size}}" required />
+                <label for="weight">Weight:</label>
+                <input type="number" name="weight" value="{{pet.weight}}" required />
+              </div>
+              <div>
+                <label for="sex">Sex:</label>
+                <input type="checkbox" name="male" {{#if male}} checked {{/if}} />
+                <img class="sex" src="/images/male.png" alt="Image of the male symbol">
+                <input type="checkbox" name="female" {{#if female}} checked {{/if}} />
+                <img class="sex" src="/images/female.png" alt="Image of the female symbol">
+              </div>
+              <div>
+                <label for="vaccinated">Vaccinated:</label>
+                <input type="checkbox" name="vaccinated" {{#if vaccinatedChecked}} checked {{/if}} />
+              </div>
+              <div>
+                <label for="neutered">Neutered:</label>
+                <input type="checkbox" name="neutered" {{#if neuteredChecked}} checked {{/if}} />
+              </div>
+              <br>
+              <button type="submit" class="green-button-edit">Edit</button>
+            </form>
+        </div>
+      </div>
   </div>
 </div>
 <div class="flex-row">
-  <div class="flex">
-    {{#each messages}}
-      <p><b>{{this.username}}</b></p>
-      <br>
-      <a href="/view-messages/{{this.petId}}/{{this.username}}"><button class="small-blue-button">View Messages</button></a>
-    {{/each}}
+  <div class="div-gray-shadow-center">
+    <div class="flex">
+      {{#each messages}}
+        <p><b>{{this.username}}</b></p>
+        <br>
+        <a href="/view-messages/{{this.petId}}/{{this.username}}"><button class="small-blue-button">View Messages</button></a>
+      {{/each}}
+    </div>
   </div>
 </div>
