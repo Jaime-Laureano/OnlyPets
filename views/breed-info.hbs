@@ -3,25 +3,30 @@
     {{#if image}}
         <img src="{{image}}" id="breed-img" alt="Breed image">
     {{/if}}
-    {{#if breed.name}}
-        <p><b>Name:</b> {{breed.name}}</p>
+    {{#if notFound}}
+        <h3>Sorry, breed information not found!</h3>
     {{/if}}
-    {{#if breed.life_span}}
-        <p><b>Life Span:</b> {{breed.life_span}}</p>
-    {{/if}}
-    {{#if breed.origin}}
-        <p><b>Origin:</b> {{breed.origin}}</p>
-    {{/if}}
-    {{#if breed.temperament}}
-        <p><b>Temperament:</b> {{breed.temperament}}</p>
-    {{/if}}
-    {{#if breed.height.metric}}
-        <p><b>Height:</b> {{breed.height.metric}}</p>
-    {{/if}}
-    {{#if breed.weight.metric}}
-        <p><b>Weight:</b> {{breed.weight.metric}}</p>
-    {{/if}}
-    {{#if breed.description}}
-        <p><b>Description:</b> {{breed.description}}</p>
-    {{/if}}
+    {{#unless notFound}}
+        {{#if breed.name}}
+            <p><b>Name:</b> {{breed.name}}</p>
+        {{/if}}
+        {{#if breed.life_span}}
+            <p><b>Life Span:</b> {{breed.life_span}}</p>
+        {{/if}}
+        {{#if breed.origin}}
+            <p><b>Origin:</b> {{breed.origin}}</p>
+        {{/if}}
+        {{#if breed.temperament}}
+            <p><b>Temperament:</b> {{breed.temperament}}</p>
+        {{/if}}
+        {{#if breed.height.metric}}
+            <p><b>Height:</b> {{breed.height.metric}}</p>
+        {{/if}}
+        {{#if breed.weight.metric}}
+            <p><b>Weight:</b> {{breed.weight.metric}}</p>
+        {{/if}}
+        {{#if breed.description}}
+            <p><b>Description:</b> {{breed.description}}</p>
+        {{/if}}
+    {{/unless}}
 </div>
