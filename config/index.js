@@ -41,9 +41,18 @@ module.exports = (app) => {
   const personViewsPath = path.join(viewsPath, "person-views");
   const shelterViewsPath = path.join(viewsPath, "shelter-views");
   app.set("views", [viewsPath, authViewsPath, personViewsPath, shelterViewsPath]);
+
   // Sets the view engine to handlebars
   app.set("view engine", "hbs");
-  // Handles access to the public folder
+  const hbs = require('hbs');
+  hbs.registerHelper("isDog", function(value) {
+    return value === "dog";
+  });
+  hbs.registerHelper("isMale", function(value) {
+    return value === "male";
+  });
+
+    // Handles access to the public folder
   app.use(express.static(path.join(__dirname, "..", "public")));
 
   // Handles access to the favicon

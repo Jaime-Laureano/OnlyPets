@@ -231,6 +231,16 @@ p {
   width: 15px;
 }
 
+.specie {
+  height: 30px;
+  width: 35px;
+}
+
+.sex {
+  height: 25px;
+  width: 20px;
+}
+
 input {
   margin: 1px;
 }
