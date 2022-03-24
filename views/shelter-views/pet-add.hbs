@@ -1,4 +1,4 @@
-<div class="flex">
+<div id="div-pet-add" class="flex">
   <h2>Add A Pet</h2>
   <form action="/pet/add" method="POST" enctype="multipart/form-data">
     <div>
@@ -10,9 +10,9 @@
       <input type="text" name="name" value="" placeholder="Enter Pet Name" required />
       <label for="specie">Specie:</label>
       <input type="checkbox" name="specieDog" />
-      <label for="specieDog">Dog</label>
+      <img class="specie" src="/images/dog.png" alt="Image of a dog">
       <input type="checkbox" name="specieCat" />
-      <label for="specieCat">Cat</label>
+      <img class="specie" src="/images/cat.png" alt="Image of a cat">
     </div>
     <div>
       <label for="breed">Breed:</label>
@@ -29,9 +29,9 @@
     <div>
       <label for="sex">Sex:</label>
       <input type="checkbox" name="male" />
-      <label for="male">Male</label>
+      <img class="sex" src="/images/male.png" alt="Image of the male symbol">
       <input type="checkbox" name="female" />
-      <label for="female">Female</label>
+      <img class="sex" src="/images/female.png" alt="Image of the female symbol">
     </div>
     <div>
       <label for="vaccinated">Vaccinated:</label>

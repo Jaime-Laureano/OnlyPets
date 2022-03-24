@@ -1,24 +1,23 @@
-<div class="flex">
+<div id="div-pet-edit" class="flex">
   <h2>Edit Pet</h2>
   <div class="div-pet">
     <div>
-      <img src="{{pet.imageUrl}}" class="pet-image" alt="Image of the pet">
+      <img src="{{pet.imageUrl}}" class="pet-image-edit" alt="Image of the pet">
     </div>
     <div class="flex-left">
       <form action="/pet/edit/{{pet._id}}" method="POST" enctype="multipart/form-data">
           <div>
             <label for="pet-image">Image:</label>
             <input type="file" name="pet-image" class="form-control-file" required />
-            <!--<input type="text" name="existingImage" hidden value="{{pet.imageUrl}}">-->
           </div>
           <div>
             <label for="name">Name:</label>
             <input type="text" name="name" value="{{pet.name}}" required />
             <label for="specie">Specie:</label>
             <input type="checkbox" name="specieDog" {{#if specieDog}} checked {{/if}} />
-            <label for="specieDog">Dog</label>
+            <img class="specie" src="/images/dog.png" alt="Image of a dog">
             <input type="checkbox" name="specieCat" {{#if specieCat}} checked {{/if}} />
-            <label for="specieCat">Cat</label>
+            <img class="specie" src="/images/cat.png" alt="Image of a cat">
           </div>
           <div>
             <label for="breed">Breed:</label>
@@ -35,9 +34,9 @@
           <div>
             <label for="sex">Sex:</label>
             <input type="checkbox" name="male" {{#if male}} checked {{/if}} />
-            <label for="male">Male</label>
+            <img class="sex" src="/images/male.png" alt="Image of the male symbol">
             <input type="checkbox" name="female" {{#if female}} checked {{/if}} />
-            <label for="female">Female</label>
+            <img class="sex" src="/images/female.png" alt="Image of the female symbol">
           </div>
           <div>
             <label for="vaccinated">Vaccinated:</label>

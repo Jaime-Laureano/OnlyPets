@@ -241,6 +241,27 @@ p {
   width: 20px;
 }
 
+#div-pet-add {
+  font-size: 25px;
+}
+
+#div-pet-add input{
+  font-size: 25px;
+}
+
+#div-pet-edit {
+  font-size: 20px;
+}
+
+#div-pet-edit input{
+  font-size: 20px;
+}
+
+.pet-image-edit {
+  width: 270px;
+  height: 270px;
+}
+
 input {
   margin: 1px;
 }
