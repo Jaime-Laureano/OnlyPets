@@ -15,113 +15,148 @@ router.get("/search", isPerson, (req, res) => {
 });
 
 router.post("/search", isPerson, async (req, res) => {
-    const { dog, cat } = req.body;
-    let speciesFilter = {};
-
-    if ((dog) && (!cat)) {
-        speciesFilter = {species: "dog"};
-    } else if ((!dog) && (cat)) {
-        speciesFilter = {species: "cat"};
-    } else {
-        speciesFilter = { $or: [{species: "dog"}, {species: "cat"}]};
+    try {
+        const { dog, cat } = req.body;
+        let speciesFilter = {};
+    
+        if ((dog) && (!cat)) {
+            speciesFilter = {species: "dog"};
+        } else if ((!dog) && (cat)) {
+            speciesFilter = {species: "cat"};
+        } else {
+            speciesFilter = { $or: [{species: "dog"}, {species: "cat"}]};
+        }
+        const pets = await Pet.find(speciesFilter);
+    
+        res.render("search-results", {pets, person: "person"});
+    } catch (error) {
+        console.error(error);
+        res.render("error");
     }
-    const pets = await Pet.find(speciesFilter);
-
-    res.render("search-results", {pets, person: "person"});
 });
 
 router.get("/pet-list", isPerson, async (req, res) => {
-    const person = await Person.findOne({user: req.session.user._id});
-    await person.populate("petList");
+    try {
+        const person = await Person.findOne({user: req.session.user._id});
+        await person.populate("petList");
 
-    const pets = person.petList;
+        const pets = person.petList;
 
-    res.render("pet-list", {pets, person: "person"});
+        res.render("pet-list", {pets, person: "person"});   
+    } catch (error) {
+        console.error(error);
+        res.render("error");
+    }
 });
 
 router.get("/pet/details/:id", isPerson, async (req, res) => {
-    const api_key = process.env.API_KEY;
-    const petId = mongoose.Types.ObjectId(req.params.id);
-
-    const pet = await Pet.findById(petId);
-    await pet.populate({ 
-        path: "messages",
-        populate: { path: "from"}
-    });
-
-    const userId = mongoose.Types.ObjectId(req.session.user._id);
-    const filteredMessages = pet.messages.filter((message) => {
-        if ((message.from.equals(userId)) || (message.to.equals(userId))) return true
-        return false;
-    });
-
-    const petShelter = await Shelter.findOne({pets: petId});
-    await petShelter.populate("user");
-
-    res.render("pet-details", {pet, petShelter, api_key, googleApiAddress: petShelter.user.address,
-                               messages: filteredMessages, person: "person"});
+    try {
+        const api_key = process.env.API_KEY;
+        const petId = mongoose.Types.ObjectId(req.params.id);
+    
+        const pet = await Pet.findById(petId);
+        await pet.populate({ 
+            path: "messages",
+            populate: { path: "from"}
+        });
+    
+        const userId = mongoose.Types.ObjectId(req.session.user._id);
+        const filteredMessages = pet.messages.filter((message) => {
+            if ((message.from.equals(userId)) || (message.to.equals(userId))) return true
+            return false;
+        });
+    
+        const petShelter = await Shelter.findOne({pets: petId});
+        await petShelter.populate("user");
+    
+        res.render("pet-details", {pet, petShelter, api_key, googleApiAddress: petShelter.user.address,
+                                   messages: filteredMessages, person: "person"});
+    } catch (error) {
+        console.error(error);
+        res.render("error");
+    }
 });
 
 router.get("/pet-list/add/:id", isPerson, async (req, res) => {
-    const petId = mongoose.Types.ObjectId(req.params.id);
+    try {
+        const petId = mongoose.Types.ObjectId(req.params.id);
 
-    const person = await Person.findOne({user: req.session.user._id});
-
-    if (!person.petList.includes(petId)) {
-        person.petList.push(petId);
-        await person.save();
+        const person = await Person.findOne({user: req.session.user._id});
+    
+        if (!person.petList.includes(petId)) {
+            person.petList.push(petId);
+            await person.save();
+        }
+    
+        res.redirect("/search");
+    } catch (error) {
+        console.error(error);
+        res.render("error");
     }
-
-    res.redirect("/search");
 });
 
 router.get("/pet-list/remove/:id", isPerson, async (req, res) => {
-    const petId = mongoose.Types.ObjectId(req.params.id);
+    try {
+        const petId = mongoose.Types.ObjectId(req.params.id);
 
-    const person = await Person.findOneAndUpdate({user: req.session.user._id}, {$pull: {petList: {$in: [petId]}}});
-
-    res.redirect("/pet-list");
+        const person = await Person.findOneAndUpdate({user: req.session.user._id}, {$pull: {petList: {$in: [petId]}}});
+    
+        res.redirect("/pet-list");
+    } catch (error) {
+        console.error(error);
+        res.render("error");
+    }
 });
 
 router.post("/message-send/:id", isPerson, async (req, res) => {
-    const { messageText } = req.body;
-    const petId = mongoose.Types.ObjectId(req.params.id);
-    const userPersonId = req.session.user._id;
-
-    const shelter = await Shelter.findOne({pets: petId});
-    const userShelterId = shelter.user;
-
-    const message = await Message.create({message: messageText, from: userPersonId, to: userShelterId});
-    const pet = await Pet.findById(petId);
-
-    pet.messages.push(message._id);
-    await pet.save();
-
-    res.redirect("/pet/details/" + petId);
+    try {
+        const { messageText } = req.body;
+        const petId = mongoose.Types.ObjectId(req.params.id);
+        const userPersonId = req.session.user._id;
+    
+        const shelter = await Shelter.findOne({pets: petId});
+        const userShelterId = shelter.user;
+    
+        const message = await Message.create({message: messageText, from: userPersonId, to: userShelterId});
+        const pet = await Pet.findById(petId);
+    
+        pet.messages.push(message._id);
+        await pet.save();
+    
+        res.redirect("/pet/details/" + petId);
+    } catch (error) {
+        console.error(error);
+        res.render("error");
+    }
 });
 
 router.get("/breed-info/:id", async (req, res) => {
-    const petId = mongoose.Types.ObjectId(req.params.id);
+    try {
+        const petId = mongoose.Types.ObjectId(req.params.id);
 
-    const pet = await Pet.findById(petId);
-
-    const responseInfo = await petApiInfoRequest(pet.species, pet.breed);
-    let responseImage = {data: {url: ""}};
-    if (responseInfo.data[0]) {
-        if (responseInfo.data[0].reference_image_id) {
-            responseImage = await petApiImageRequest(pet.species, responseInfo.data[0].reference_image_id);
-        }
-        if (req.session.role === "person") {
-            res.render("breed-info", {breed: responseInfo.data[0], image: responseImage.data.url, person: "person"});
+        const pet = await Pet.findById(petId);
+    
+        const responseInfo = await petApiInfoRequest(pet.species, pet.breed);
+        let responseImage = {data: {url: ""}};
+        if (responseInfo.data[0]) {
+            if (responseInfo.data[0].reference_image_id) {
+                responseImage = await petApiImageRequest(pet.species, responseInfo.data[0].reference_image_id);
+            }
+            if (req.session.role === "person") {
+                res.render("breed-info", {breed: responseInfo.data[0], image: responseImage.data.url, person: "person"});
+            } else {
+                res.render("breed-info", {breed: responseInfo.data[0], image: responseImage.data.url, shelter: "shelter"});
+            }
         } else {
-            res.render("breed-info", {breed: responseInfo.data[0], image: responseImage.data.url, shelter: "shelter"});
+            if (req.session.role === "person") {
+                res.render("breed-info", {image: "/images/catdog.jpg", notFound: "not found", person: "person"});
+            } else {
+                res.render("breed-info", {image: "/images/catdog.jpg", notFound: "not found", shelter: "shelter"});
+            }
         }
-    } else {
-        if (req.session.role === "person") {
-            res.render("breed-info", {image: "/images/catdog.jpg", notFound: "not found", person: "person"});
-        } else {
-            res.render("breed-info", {image: "/images/catdog.jpg", notFound: "not found", shelter: "shelter"});
-        }
+    } catch (error) {
+        console.error(error);
+        res.render("error");
     }
 });
 

@@ -10,28 +10,33 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/login", async (req, res) => {
-  const { username, password } = req.body;
-  const user = await User.findOne({username: username});
-
-  if (!user) {
-    res.render("login", {error: "User not found!", logout: "logout"});
-    return;
-  }
-
-  const checkPassword = await bcrypt.compare(password, user.password);
-
-  if (!checkPassword) {
-    res.render("login", {error: "Wrong Password!", logout: "logout"});
-    return;
-  }
-
-  req.session.user = user;
-  if (user.isShelter) {
-    req.session.role = "shelter";
-    res.redirect("/shelter-pets");
-  } else {
-    req.session.role = "person";
-    res.redirect("/search");
+  try {
+    const { username, password } = req.body;
+    const user = await User.findOne({username: username});
+  
+    if (!user) {
+      res.render("login", {error: "User not found!", logout: "logout"});
+      return;
+    }
+  
+    const checkPassword = await bcrypt.compare(password, user.password);
+  
+    if (!checkPassword) {
+      res.render("login", {error: "Wrong Password!", logout: "logout"});
+      return;
+    }
+  
+    req.session.user = user;
+    if (user.isShelter) {
+      req.session.role = "shelter";
+      res.redirect("/shelter-pets");
+    } else {
+      req.session.role = "person";
+      res.redirect("/search");
+    }
+  } catch (error) {
+    console.error(error);
+    res.render("error");
   }
 });
 
